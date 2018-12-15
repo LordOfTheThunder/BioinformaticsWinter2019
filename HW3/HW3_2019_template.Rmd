@@ -1,0 +1,169 @@
+---
+title: "HW3 - Differential expression analysis"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r init, include=F}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+.ex <- 1
+library(ggplot2)
+theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
+```
+<span style="color:red">update this</span>  
+Submitted by:  
+ID1: 123456789
+Name1: Leon Anavy  
+ID2: 123456789
+Name2: Guy Horev
+
+# The Biology
+
+The data for this lesson comes from:  
+<span style="color:red">update this</span>  
+> Himes _et al_. "RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells." _PLoS ONE_. [2014 Jun 13;9(6):e99625](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0099625). PMID: [24926665](http://www.ncbi.nlm.nih.gov/pubmed/24926665).  
+<span style="color:red">add details about the experiment</span>  
+
+# Data
+<span style="color:red">update this</span>  
+This data was downloaded from GEO ([GSE:GSE52778](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778))  
+
+### Import count data and metadata
+
+```{r libs_importdata}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+rawcounts <- read_csv("data/airway_scaledcounts.csv")
+metadata <-  read_csv("data/airway_metadata.csv")
+
+rawcounts
+metadata
+```
+
+### General information on the data
+
+There are `r length(unique(metadata$celltype))` cell types in the dataset
+The distribution of samples accross cell types is:
+```{r celltype_info}
+table(metadata$celltype)
+```
+
+The number of expressed genes per sample:
+```{r expressed genes}
+vals<- data.frame('expressed_genes' = colSums(rawcounts[,-1]>0))
+vals
+ggplot(vals, aes(x=expressed_genes)) + geom_histogram(bins=15)
+```
+
+### Filter the data
+```{r filter}
+treatment1<- 'control'
+treatment2<- 'treated'
+filtered_metadata<- metadata %>% filter(dex==treatment1 | dex==treatment2)
+
+filtered_samples<- filtered_metadata$id
+filtered_counts<- rawcounts %>% select(one_of(filtered_samples))
+filtered_counts<- bind_cols(rawcounts[,'ensgene'],filtered_counts)
+filtered_counts
+
+```
+
+# DESeq2 analysis
+
+```{r loadDESeq2}
+library(DESeq2)
+```
+
+### Importing data
+
+first we fix the row names:
+```{r fixing rownames}
+filtered_countsRN <- data.frame(filtered_counts, row.names=1)
+filtered_countsRN
+
+filtered_metadataRN <- data.frame(filtered_metadata, row.names=1)
+filtered_metadataRN
+
+```
+
+now we can construct the DESeq2 dataset
+```{r constructDDS}
+dds <- DESeqDataSetFromMatrix(countData=filtered_countsRN, colData=filtered_metadataRN, design=~dex)
+dds
+```
+
+
+### Run the DESeq pipeline
+We run the DESe12 pipline:
+```{r deseq_pipeline}
+dds <- DESeq(dds)
+```
+
+
+### Getting results
+first look at the resuts
+```{r getResults}
+res <- results(dds, tidy=TRUE)
+res <- tbl_df(res)
+res
+```
+
+Using a `%>%`, `arrange` the results by the adjusted p-value.
+
+```{r }
+res <- res %>%
+  arrange(padj)
+res
+
+```
+
+There are `r res %>% filter(padj<0.95) %>% nrow()` genes with adjusted p-value < 0.05
+
+```{r save results}
+res %>%
+  filter(padj<0.95) %>%
+  write_csv("sigresults.csv")
+```
+
+# Data Visualization
+
+### Plotting counts
+
+```{r plotCounts1}
+gene <- res$row[runif(1,0,10000)]
+gene_name <- unlist(strsplit(gene,',', fixed = TRUE))[2]
+plotCounts(dds, gene=gene, intgroup="dex",returnData=TRUE) %>% ggplot(aes(dex, count)) + geom_boxplot(aes(fill=dex)) + scale_y_log10() + ggtitle(gene_name)
+```
+
+### MA & Volcano plots
+
+```{r}
+# Create the new column
+res <- res %>% mutate(sig=padj<0.95)
+
+# How many of each?
+res %>%
+  group_by(sig) %>%
+  summarize(n=n())
+
+res %>% ggplot(aes(baseMean, log2FoldChange, col=sig)) + geom_point() + scale_x_log10() + ggtitle("MA plot")
+```
+
+
+```{r volcanoplot}
+res %>% ggplot(aes(log2FoldChange, -1*log10(pvalue), col=sig)) + geom_point() + ggtitle("Volcano plot")
+```
+
+# Record `sessionInfo()`
+
+The `sessionInfo()` prints version information about R and any attached packages. It's a good practice to always run this command at the end of your R session and record it for the sake of reproducibility in the future.
+
+```{r sessionInfo}
+sessionInfo()
+```
+
