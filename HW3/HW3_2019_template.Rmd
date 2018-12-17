@@ -23,7 +23,7 @@ Name2: Anna Romanov
 # The Biology
 
 The data for this lesson comes from:  
-> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0099625). PMID: [24926665](http://www.ncbi.nlm.nih.gov/pubmed/24926665).  
+> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](https://webcourse.cs.technion.ac.il/236523/Winter2018-2019/hw/WCFiles/Q1_paper.pdf?5265). PMID: [24926665](https://www.ncbi.nlm.nih.gov/pubmed/29898990).  
 <span style="color:red">add details about the experiment</span>  
 
 # Data

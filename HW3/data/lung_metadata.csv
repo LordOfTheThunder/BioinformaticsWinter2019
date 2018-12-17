@@ -1,34 +1,34 @@
-﻿!Sample_title,!Sample_characteristics_ch1,!Sample_characteristics_ch1
-EBC1R1,cell line: EBC1,treatment: No treatment
-EBC1R2,cell line: EBC1,treatment: No treatment
-EBC1R3,cell line: EBC1,treatment: No treatment
-EBC1Crizo1,cell line: EBC1,treatment: Crizotinib
-EBC1Crizo2,cell line: EBC1,treatment: Crizotinib
-EBC1Crizo3,cell line: EBC1,treatment: Crizotinib
-EBC1IFN1,cell line: EBC1,treatment: Interferon Î³
-EBC1IFN2,cell line: EBC1,treatment: Interferon Î³
-EBC1IFN3,cell line: EBC1,treatment: Interferon Î³
-H1573B1,cell line: H1573,treatment: No treatment
-H1573B2,cell line: H1573,treatment: No treatment
-H1573B3,cell line: H1573,treatment: No treatment
-H1573IFN1,cell line: H1573,treatment: Interferon Î³
-H1573IFN2,cell line: H1573,treatment: Interferon Î³
-H1573IFN3,cell line: H1573,treatment: Interferon Î³
-H1993B1,cell line: H1993,treatment: No treatment
-H1993B2,cell line: H1993,treatment: No treatment
-H1993B3,cell line: H1993,treatment: No treatment
-H1993IFN1,cell line: H1993,treatment: Interferon Î³
-H1993IFN2,cell line: H1993,treatment: Interferon Î³
-H1993IFN3,cell line: H1993,treatment: Interferon Î³
-H596B1,cell line: H596,treatment: No treatment
-H596B2,cell line: H596,treatment: No treatment
-H596B3,cell line: H596,treatment: No treatment
-H596CrizoH1,cell line: H596,treatment: Crizotinib + Hepatocyte growth factor (HGF)
-H596CrizoH2,cell line: H596,treatment: Crizotinib +HGF
-H596CrizoH3,cell line: H596,treatment: Crizotinib +HGF
-H596HGF1,cell line: H596,treatment: Hepatocyte growth factor (HGF)
-H596HGF2,cell line: H596,treatment: Hepatocyte growth factor (HGF)
-H596HGF3,cell line: H596,treatment: Hepatocyte growth factor (HGF)
-H596IFN1,cell line: H596,treatment: Interferon Î³
-H596IFN2,cell line: H596,treatment: Interferon Î³
-H596IFN3,cell line: H596,treatment: Interferon Î³
+sample_name,cell line,dex,geo_id
+AE1148,EBC1,No treatment,GSM2949380
+AE1149,EBC1,No treatment,GSM2949381
+AE1150,EBC1,No treatment,GSM2949382
+AE1151,EBC1,Crizotinib,GSM2949383
+AE1152,EBC1,Crizotinib,GSM2949384
+AE1153,EBC1,Crizotinib,GSM2949385
+AE1154,EBC1,Interferon γ,GSM2949386
+AE1155,EBC1,Interferon γ,GSM2949387
+AE1156,EBC1,Interferon γ,GSM2949388
+AE1157,H1573,No treatment,GSM2949389
+AE1158,H1573,No treatment,GSM2949390
+AE1159,H1573,No treatment,GSM2949391
+AE1160,H1573,Interferon γ,GSM2949392
+AE1161,H1573,Interferon γ,GSM2949393
+AE1162,H1573,Interferon γ,GSM2949394
+AE1163,H1993,No treatment,GSM2949395
+AE1164,H1993,No treatment,GSM2949396
+AE1165,H1993,No treatment,GSM2949397
+AE1166,H1993,Interferon γ,GSM2949398
+AE1167,H1993,Interferon γ,GSM2949399
+AE1168,H1993,Interferon γ,GSM2949400
+AE1169,H596,No treatment,GSM2949401
+AE1170,H596,No treatment,GSM2949402
+AE1171,H596,No treatment,GSM2949403
+AE1172,H596,Crizotinib + Hepatocyte growth factor (HGF),GSM2949404
+AE1173,H596,Crizotinib +HGF,GSM2949405
+AE1174,H596,Crizotinib +HGF,GSM2949406
+AE1175,H596,Hepatocyte growth factor (HGF),GSM2949407
+AE1176,H596,Hepatocyte growth factor (HGF),GSM2949408
+AE1177,H596,Hepatocyte growth factor (HGF),GSM2949409
+AE1178,H596,Interferon γ,GSM2949410
+AE1179,H596,Interferon γ,GSM2949411
+AE1180,H596,Interferon γ,GSM2949412
