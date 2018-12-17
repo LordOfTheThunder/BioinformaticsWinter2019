@@ -15,21 +15,19 @@ theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
 ```
 <span style="color:red">update this</span>  
 Submitted by:  
-ID1: 123456789
-Name1: Leon Anavy  
-ID2: 123456789
-Name2: Guy Horev
+ID1: 320983216
+Name1: Maxim Kolchinsky  
+ID2: 321340580
+Name2: Anna Romanov
 
 # The Biology
 
 The data for this lesson comes from:  
-<span style="color:red">update this</span>  
-> Himes _et al_. "RNA-Seq Transcriptome Profiling Identifies CRISPLD2 as a Glucocorticoid Responsive Gene that Modulates Cytokine Function in Airway Smooth Muscle Cells." _PLoS ONE_. [2014 Jun 13;9(6):e99625](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0099625). PMID: [24926665](http://www.ncbi.nlm.nih.gov/pubmed/24926665).  
+> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0099625). PMID: [24926665](http://www.ncbi.nlm.nih.gov/pubmed/24926665).  
 <span style="color:red">add details about the experiment</span>  
 
 # Data
-<span style="color:red">update this</span>  
-This data was downloaded from GEO ([GSE:GSE52778](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778))  
+This data was downloaded from GEO ([GSE:GSE109720](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109720))  
 
 ### Import count data and metadata
 
@@ -38,8 +36,8 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
-rawcounts <- read_csv("data/airway_scaledcounts.csv")
-metadata <-  read_csv("data/airway_metadata.csv")
+rawcounts <- read_csv("data/lung_counts.csv")
+metadata <-  read_csv("data/lung_metadata.csv")
 
 rawcounts
 metadata
