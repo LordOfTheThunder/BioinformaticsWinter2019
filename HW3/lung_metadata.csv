@@ -1,0 +1,34 @@
+﻿!Sample_title,!Sample_characteristics_ch1,!Sample_characteristics_ch1
+EBC1R1,cell line: EBC1,treatment: No treatment
+EBC1R2,cell line: EBC1,treatment: No treatment
+EBC1R3,cell line: EBC1,treatment: No treatment
+EBC1Crizo1,cell line: EBC1,treatment: Crizotinib
+EBC1Crizo2,cell line: EBC1,treatment: Crizotinib
+EBC1Crizo3,cell line: EBC1,treatment: Crizotinib
+EBC1IFN1,cell line: EBC1,treatment: Interferon Î³
+EBC1IFN2,cell line: EBC1,treatment: Interferon Î³
+EBC1IFN3,cell line: EBC1,treatment: Interferon Î³
+H1573B1,cell line: H1573,treatment: No treatment
+H1573B2,cell line: H1573,treatment: No treatment
+H1573B3,cell line: H1573,treatment: No treatment
+H1573IFN1,cell line: H1573,treatment: Interferon Î³
+H1573IFN2,cell line: H1573,treatment: Interferon Î³
+H1573IFN3,cell line: H1573,treatment: Interferon Î³
+H1993B1,cell line: H1993,treatment: No treatment
+H1993B2,cell line: H1993,treatment: No treatment
+H1993B3,cell line: H1993,treatment: No treatment
+H1993IFN1,cell line: H1993,treatment: Interferon Î³
+H1993IFN2,cell line: H1993,treatment: Interferon Î³
+H1993IFN3,cell line: H1993,treatment: Interferon Î³
+H596B1,cell line: H596,treatment: No treatment
+H596B2,cell line: H596,treatment: No treatment
+H596B3,cell line: H596,treatment: No treatment
+H596CrizoH1,cell line: H596,treatment: Crizotinib + Hepatocyte growth factor (HGF)
+H596CrizoH2,cell line: H596,treatment: Crizotinib +HGF
+H596CrizoH3,cell line: H596,treatment: Crizotinib +HGF
+H596HGF1,cell line: H596,treatment: Hepatocyte growth factor (HGF)
+H596HGF2,cell line: H596,treatment: Hepatocyte growth factor (HGF)
+H596HGF3,cell line: H596,treatment: Hepatocyte growth factor (HGF)
+H596IFN1,cell line: H596,treatment: Interferon Î³
+H596IFN2,cell line: H596,treatment: Interferon Î³
+H596IFN3,cell line: H596,treatment: Interferon Î³
