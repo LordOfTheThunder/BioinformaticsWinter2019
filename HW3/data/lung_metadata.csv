@@ -1,4 +1,4 @@
-sample_name,cell line,dex,geo_id
+id,celltype,dex,geo_id
 AE1148,EBC1,No treatment,GSM2949380
 AE1149,EBC1,No treatment,GSM2949381
 AE1150,EBC1,No treatment,GSM2949382

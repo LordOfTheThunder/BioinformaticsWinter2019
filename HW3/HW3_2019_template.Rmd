@@ -13,7 +13,6 @@ opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
 library(ggplot2)
 theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
 ```
-<span style="color:red">update this</span>  
 Submitted by:  
 ID1: 320983216
 Name1: Maxim Kolchinsky  
@@ -23,8 +22,34 @@ Name2: Anna Romanov
 # The Biology
 
 The data for this lesson comes from:  
-> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](https://webcourse.cs.technion.ac.il/236523/Winter2018-2019/hw/WCFiles/Q1_paper.pdf?5265). PMID: [24926665](https://www.ncbi.nlm.nih.gov/pubmed/29898990).  
-<span style="color:red">add details about the experiment</span>  
+> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](https://webcourse.cs.technion.ac.il/236523/Winter2018-2019/hw/WCFiles/Q1_paper.pdf?5265). PMID: [24926665](https://www.ncbi.nlm.nih.gov/pubmed/29898990).
+
+Purpose: The blockade of immune checkpoints such as PDL1 and PD-1 is being exploited therapeutically in several types
+of malignancies. Here, we aimed to understand the contribution of the genetics of lung cancer to the ability of tumor cells to
+escape immunosurveillance checkpoints.
+Experimental Design: More than 150 primary non-small
+cell lung cancers, including pulmonary sarcomatoid carcinomas, were tested for levels of the HLA-I complex, PD-L1,
+tumor-infiltrating CD8þ lymphocytes, and alterations in main
+lung cancer genes. Correlations were validated in cancer cell
+lines using appropriate treatments to activate or inhibit selected pathways. We also performed RNA sequencing to assess
+changes in gene expression after these treatments.
+Results: MET-oncogenic activation tended to associate
+with positive PD-L1 immunostaining, whereas STK11 mutations were correlated with negative immunostaining. In
+MET-altered cancer cells, MET triggered a transcriptional
+increase of PD-L1 that was independent of the IFNgmediated JAK/STAT pathway. The activation of MET also
+upregulated other immunosuppressive genes (PDCD1LG2
+and SOCS1) and transcripts involved in angiogenesis
+(VEGFA and NRP1) and in cell proliferation. We also report
+recurrent inactivating mutations in JAK2 that co-occur with
+alterations in MET and STK11, which prevented the induction of immunoresponse-related genes following treatment
+with IFNg.
+Conclusions: We show that MET activation promotes the
+expression of several negative checkpoint regulators of the
+immunoresponse, including PD-L1. In addition, we report
+inactivation of JAK2 in lung cancer cells that prevented the
+response to IFNg. These alterations are likely to facilitate
+tumor growth by enabling immune tolerance and may affect
+the response to immune checkpoint inhibitors
 
 # Data
 This data was downloaded from GEO ([GSE:GSE109720](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109720))  
@@ -38,14 +63,12 @@ library(ggplot2)
 
 rawcounts <- read_csv("data/lung_counts.csv")
 metadata <-  read_csv("data/lung_metadata.csv")
-
-rawcounts
-metadata
 ```
 
 ### General information on the data
 
 There are `r length(unique(metadata$celltype))` cell types in the dataset
+
 The distribution of samples accross cell types is:
 ```{r celltype_info}
 table(metadata$celltype)
@@ -60,8 +83,9 @@ ggplot(vals, aes(x=expressed_genes)) + geom_histogram(bins=15)
 
 ### Filter the data
 ```{r filter}
-treatment1<- 'control'
-treatment2<- 'treated'
+treatment1<- 'No treatment'
+treatment2<- 'Crizotinib'
+dex <- metadata$dex
 filtered_metadata<- metadata %>% filter(dex==treatment1 | dex==treatment2)
 
 filtered_samples<- filtered_metadata$id
@@ -120,7 +144,7 @@ res
 
 ```
 
-There are `r res %>% filter(padj<0.95) %>% nrow()` genes with adjusted p-value < 0.05
+
 
 ```{r save results}
 res %>%
