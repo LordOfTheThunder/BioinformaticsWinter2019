@@ -144,7 +144,17 @@ res
 
 ```
 
+```{r}
+res_1 <- res %>% filter(padj<0.05) %>% nrow()
+```
 
+There are `r res_1` genes with adjusted p-value < 0.05
+
+```{r}
+res_2 <- res %>% filter(padj<0.01) %>% nrow()
+```
+
+There are `r res_2` genes with adjusted p-value < 0.01
 
 ```{r save results}
 res %>%
@@ -173,9 +183,15 @@ res %>%
   group_by(sig) %>%
   summarize(n=n())
 
+log2fold_above_2 = res %>% filter(log2FoldChange > 2) %>% nrow()
+log2fold_below_minus_2 = res %>% filter(log2FoldChange < -2) %>% nrow()
+
 res %>% ggplot(aes(baseMean, log2FoldChange, col=sig)) + geom_point() + scale_x_log10() + ggtitle("MA plot")
 ```
 
+There are `r log2fold_above_2` with log fold change above 2
+
+There are `r log2fold_below_minus_2` with log fold change below -2
 
 ```{r volcanoplot}
 res %>% ggplot(aes(log2FoldChange, -1*log10(pvalue), col=sig)) + geom_point() + ggtitle("Volcano plot")
