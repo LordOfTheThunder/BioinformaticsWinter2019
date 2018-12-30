@@ -81,15 +81,23 @@ vals
 ggplot(vals, aes(x=expressed_genes)) + geom_histogram(bins=15)
 ```
 
+```{r highly_expressed genes}
+vals<- data.frame('highly_expressed_genes' = colSums(rawcounts[,-1]>1000))
+vals
+ggplot(vals, aes(x=highly_expressed_genes)) + geom_histogram(bins=15)
+```
+
 ### Filter the data
 ```{r filter}
 treatment1<- 'No treatment'
 treatment2<- 'Crizotinib'
+celltype0<- 'EBC1'
 dex <- metadata$dex
-filtered_metadata<- metadata %>% filter(dex==treatment1 | dex==treatment2)
+filtered_metadata<- metadata %>% filter(dex==treatment1 | dex==treatment2 ) %>% filter(celltype==celltype0)
+filtered_metadata
 
 filtered_samples<- filtered_metadata$id
-filtered_counts<- rawcounts %>% select(one_of(filtered_samples))
+filtered_counts<- rawcounts %>% select(filtered_samples)
 filtered_counts<- bind_cols(rawcounts[,'ensgene'],filtered_counts)
 filtered_counts
 
@@ -148,13 +156,13 @@ res
 res_1 <- res %>% filter(padj<0.05) %>% nrow()
 ```
 
-There are `r res_1` genes with adjusted p-value < 0.05
+There `r res_1` are genes with p-value < 0.05
 
 ```{r}
 res_2 <- res %>% filter(padj<0.01) %>% nrow()
 ```
 
-There are `r res_2` genes with adjusted p-value < 0.01
+There `r res_2` are genes with p-value < 0.01
 
 ```{r save results}
 res %>%
