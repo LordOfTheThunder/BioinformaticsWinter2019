@@ -175,8 +175,8 @@ res %>%
 ### Plotting counts
 
 ```{r plotCounts1}
-gene <- res$row[runif(1,0,10000)]
-gene_name <- unlist(strsplit(gene,',', fixed = TRUE))[2]
+gene <- "ENSG00000146072.6"
+gene_name <- "ENSG00000146072.6"
 plotCounts(dds, gene=gene, intgroup="dex",returnData=TRUE) %>% ggplot(aes(dex, count)) + geom_boxplot(aes(fill=dex)) + scale_y_log10() + ggtitle(gene_name)
 ```
 
