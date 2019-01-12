@@ -1,0 +1,15 @@
+import pandas as pd
+import re
+
+df = pd.read_csv("DE_results.csv")
+df = df.sort_values(['padj'])
+
+find = re.compile(r"^[^.]*")
+
+for i in range(0, len(df.index)):
+    df.at[i, 'row'] = re.search(find, df.iloc[i]['row']).group(0)
+   # df[df.loc[i]['row']] = re.search(find, df.iloc[0]['row']).group(0)
+
+print(len(df.index))
+
+df['row'].to_csv("ranked_genes.txt", index=False, header=False)

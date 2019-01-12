@@ -1,0 +1,156 @@
+---
+title: "HW4 - Gene expression - Clustering and Enrichment"
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+
+```{r init, include=F}
+library(knitr)
+opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
+.ex <- 1
+library(ggplot2)
+theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
+```
+Submitted by:  
+ID1: 320983216
+Name1: Maxim Kolchinsky  
+ID2: 321340580
+Name2: Anna Romanov
+
+# The Biology
+
+
+The data for this lesson comes from:  
+> Saigi _et al_. "MET-Oncogenic and JAK2-Inactivating Alterations Are Independent Factors That Affect Regulation of PD-L1 Expression in Lung Cancer" _PLoS ONE_. [2018 Jun 13;9(6):e99625](https://webcourse.cs.technion.ac.il/236523/Winter2018-2019/hw/WCFiles/Q1_paper.pdf?5265). PMID: [24926665](https://www.ncbi.nlm.nih.gov/pubmed/29898990).
+
+Purpose: The blockade of immune checkpoints such as PDL1 and PD-1 is being exploited therapeutically in several types
+of malignancies. Here, we aimed to understand the contribution of the genetics of lung cancer to the ability of tumor cells to
+escape immunosurveillance checkpoints.
+Experimental Design: More than 150 primary non-small
+cell lung cancers, including pulmonary sarcomatoid carcinomas, were tested for levels of the HLA-I complex, PD-L1,
+tumor-infiltrating CD8þ lymphocytes, and alterations in main
+lung cancer genes. Correlations were validated in cancer cell
+lines using appropriate treatments to activate or inhibit selected pathways. We also performed RNA sequencing to assess
+changes in gene expression after these treatments.
+Results: MET-oncogenic activation tended to associate
+with positive PD-L1 immunostaining, whereas STK11 mutations were correlated with negative immunostaining. In
+MET-altered cancer cells, MET triggered a transcriptional
+increase of PD-L1 that was independent of the IFNgmediated JAK/STAT pathway. The activation of MET also
+upregulated other immunosuppressive genes (PDCD1LG2
+and SOCS1) and transcripts involved in angiogenesis
+(VEGFA and NRP1) and in cell proliferation. We also report
+recurrent inactivating mutations in JAK2 that co-occur with
+alterations in MET and STK11, which prevented the induction of immunoresponse-related genes following treatment
+with IFNg.
+Conclusions: We show that MET activation promotes the
+expression of several negative checkpoint regulators of the
+immunoresponse, including PD-L1. In addition, we report
+inactivation of JAK2 in lung cancer cells that prevented the
+response to IFNg. These alterations are likely to facilitate
+tumor growth by enabling immune tolerance and may affect
+the response to immune checkpoint inhibitors
+
+# Data
+This data was downloaded from GEO ([GSE:GSE109720](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE109720))  
+
+### Import count data and metadata
+
+```{r libs_importdata}
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+rawcounts <- read_csv("data/lung_counts.csv")
+metadata <-  read_csv("data/lung_metadata.csv")
+
+rawcounts
+metadata
+```
+
+### Clustering - k-means
+
+```{r kmeans}
+library(tibble)
+library(tidyr)
+# a plotting function
+plot_heatmap <- function(km) {
+  centers <- km$centers %>%
+      tbl_df() %>%
+      rownames_to_column('Cluster') %>%
+      gather(Sample, value, -Cluster) %>%
+      mutate(
+          Cluster = factor(Cluster),
+          Sample = factor(Sample)
+      )
+   ggplot(centers,aes(Sample,Cluster)) + geom_tile(aes(fill=value)) + geom_text(aes(label = round(value, 1)), angle=90, size=4) + theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=0, size=12))
+}
+
+# cluster the genes
+rawcounts_RN<- data.frame(rawcounts, row.names=1)
+km <- kmeans(rawcounts_RN,5)
+km$centers
+table(km$cluster)
+plot_heatmap(km)
+
+# apply log scaling
+rawcounts_RN
+rawcounts_log = log10(1+rawcounts_RN)
+km <- kmeans(rawcounts_log,5)
+km$centers
+table(km$cluster)
+plot_heatmap(km)
+
+
+```
+```{r kmeans on DE genes}
+# load DE gene list
+DE_res <- read_csv("data/sigresults.csv")
+DE_genes <- DE_res$row
+nrow(DE_genes)
+# filter differentially expressed genes
+dat_filtered = rawcounts_log[DE_genes,]
+# utils::View(dat_filtered) #show all rows (sanity test)
+dat_filtered
+km <- kmeans(dat_filtered,5)
+km$centers
+table(km$cluster)
+plot_heatmap(km)
+
+```
+
+```{r kmeans on the samples}
+
+# a plotting function
+plot_heatmap <- function(km) {
+  centers <- km$centers %>%
+      tbl_df() %>%
+      rownames_to_column('Cluster') %>%
+      gather(Gene, value, -Cluster) %>%
+      mutate(
+          Cluster = factor(Cluster),
+          Gene = factor(Gene)
+      )
+   ggplot(centers,aes(Cluster,Gene)) + geom_tile(aes(fill=value)) + theme(axis.text.x=element_text(angle=0, vjust=0.5, hjust=0, size=12)) + theme(axis.text.y=element_blank())
+}
+
+#filter example
+rawcounts_filtered <- rawcounts_RN %>% sample_n(500) 
+# cluster the samples
+km <- kmeans(t(rawcounts_filtered),3) 
+# t function turns samples into rows and genes into columns, this way genes are the features and samples are clustered
+km$centers
+table(km$cluster)
+plot_heatmap(km)
+
+```
+# Record `sessionInfo()`
+
+The `sessionInfo()` prints version information about R and any attached packages. It's a good practice to always run this command at the end of your R session and record it for the sake of reproducibility in the future.
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+
