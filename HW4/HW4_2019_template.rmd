@@ -99,9 +99,15 @@ plot(num_genes, type="l", main='num of genes in each cluster')
 
 plot_heatmap(km)
 
+# remove rows of zeroes
+rawcounts_RN$sum <- rowSums(rawcounts_RN)
+rawcounts_clean <- rawcounts_RN[ rawcounts_RN$sum >= 10, ]
+rawcounts_clean
+rawcounts_clean$sum <- NULL
+
 # apply log scaling
 rawcounts_RN
-rawcounts_log = log10(1+rawcounts_RN)
+rawcounts_log = log10(1+rawcounts_clean)
 km <- kmeans(rawcounts_log,5)
 km$centers
 num_genes <- table(km$cluster)
@@ -111,20 +117,36 @@ plot(num_genes, type="l", main='num of genes in each cluster')
 
 plot_heatmap(km)
 
+# Apply standardization
+rawcounts_scaled <- scale(rawcounts_log)
+km <- kmeans(rawcounts_scaled,5)
+km$centers
+num_genes <- table(km$cluster)
+
+num_genes
+plot(num_genes, type="l", main='num of genes in each cluster')
+
+plot_heatmap(km)
 
 ```
+
+
 ```{r kmeans on DE genes}
 # load DE gene list
 DE_res <- read_csv("data/sigresults.csv")
 DE_genes <- DE_res$row
-nrow(DE_genes)
-# filter differentially expressed genes
+
+# example of filtering a data frame
+# good_raw_names <- row.names(rawcounts_RN[runif(5,0,nrow(rawcounts_RN)),])
+# good_raw_names
 dat_filtered = rawcounts_log[DE_genes,]
-# utils::View(dat_filtered) #show all rows (sanity test)
-dat_filtered
-km <- kmeans(dat_filtered,5)
+rawcounts_scaled <- scale(dat_filtered)
+km <- kmeans(rawcounts_scaled,5)
 km$centers
-table(km$cluster)
+num_genes <- table(km$cluster)
+
+num_genes
+plot(num_genes, type="l", main='num of genes in each cluster')
 plot_heatmap(km)
 
 ```
@@ -144,16 +166,19 @@ plot_heatmap <- function(km) {
    ggplot(centers,aes(Cluster,Gene)) + geom_tile(aes(fill=value)) + theme(axis.text.x=element_text(angle=0, vjust=0.5, hjust=0, size=12)) + theme(axis.text.y=element_blank())
 }
 
-#filter example
-rawcounts_filtered <- rawcounts_RN %>% sample_n(500) 
 # cluster the samples
-km <- kmeans(t(rawcounts_filtered),3) 
-# t function turns samples into rows and genes into columns, this way genes are the features and samples are clustered
-km$centers
+rawcounts_clean <- rawcounts_RN[ rawcounts_RN$sum >= 10, ]
+rawcounts_log = log10(1+rawcounts_clean)
+DE_res <- read_csv("data/sigresults.csv")
+DE_genes <- DE_res$row
+dat_filtered = rawcounts_log[DE_genes,]
+km <- kmeans(t(dat_filtered),5)
+#km$centers
 table(km$cluster)
 plot_heatmap(km)
 
 ```
+
 # Record `sessionInfo()`
 
 The `sessionInfo()` prints version information about R and any attached packages. It's a good practice to always run this command at the end of your R session and record it for the sake of reproducibility in the future.
@@ -161,5 +186,3 @@ The `sessionInfo()` prints version information about R and any attached packages
 ```{r sessionInfo}
 sessionInfo()
 ```
-
-
