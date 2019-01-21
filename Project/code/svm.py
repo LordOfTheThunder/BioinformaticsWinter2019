@@ -4,12 +4,11 @@ from classifier import abstract_classifier
 from sklearn.metrics import accuracy_score
 
 def fix_col_val(string):
-    if pd.isnull(string):
-        return 0
     return (string.split('///')[0]).split(':')[1]
 
 def fix_svm_data():
     df = pd.read_csv("svm_data.csv")
+    df = df[df['GO:Process ID'].notnull()]
     list = [fix_col_val(row) for row in df['GO:Process ID']]
     df['GO:Process ID'] = list
     df.to_csv("svm_data_fixed.csv", index=False)
@@ -38,9 +37,6 @@ if __name__ == "__main__":
     svm = svm_classifier(data, labels, clf)
 
     test = data_test.tail(int(rows * 0.1))
-
-    true_pos, true_neg, false_pos, false_neg = 0, 0, 0, 0
-    N = len(test[0])
 
     y_pred = [svm.classify(features) for features, label in zip(test[0], test[1])]
     y_true = df['GO:Process ID'].tail(int(rows * 0.1))
