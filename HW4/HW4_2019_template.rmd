@@ -1,9 +1,6 @@
 ---
 title: "HW4 - Gene expression - Clustering and Enrichment"
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
+output: pdf_document
 ---
 
 ```{r init, include=F}
@@ -137,11 +134,19 @@ DE_res <- read_csv("data/sigresults.csv")
 DE_genes <- DE_res$row
 
 # example of filtering a data frame
-# good_raw_names <- row.names(rawcounts_RN[runif(5,0,nrow(rawcounts_RN)),])
-# good_raw_names
-dat_filtered = rawcounts_log[DE_genes,]
-rawcounts_scaled <- scale(dat_filtered)
+dat_filtered = rawcounts_clean[DE_genes,]
+rawcounts_log = log10(1+dat_filtered)
+rawcounts_scaled <- scale(rawcounts_log)
 km <- kmeans(rawcounts_scaled,5)
+km$centers
+num_genes <- table(km$cluster)
+
+num_genes
+plot(num_genes, type="l", main='num of genes in each cluster')
+plot_heatmap(km)
+
+# try again with less clusters
+km <- kmeans(rawcounts_scaled,3)
 km$centers
 num_genes <- table(km$cluster)
 
