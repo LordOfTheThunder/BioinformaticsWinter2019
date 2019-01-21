@@ -1,6 +1,7 @@
 from sklearn import svm
 import pandas as pd
 from classifier import abstract_classifier
+from sklearn.metrics import accuracy_score
 
 def fix_col_val(string):
     if pd.isnull(string):
@@ -25,12 +26,6 @@ class svm_classifier(abstract_classifier):
 
 if __name__ == "__main__":
 
-    def accuracy():
-        return (true_pos + true_neg) / N
-
-    def error():
-        return (false_pos + false_neg) / N
-
     fix_svm_data()
     # get data and labels from csv
     df = pd.read_csv("svm_data_fixed.csv")
@@ -46,15 +41,7 @@ if __name__ == "__main__":
 
     true_pos, true_neg, false_pos, false_neg = 0, 0, 0, 0
     N = len(test[0])
-    for features, label in zip(test[0], test[1]):
-            res = svm.classify(features)
-            if res == 0 and label == 0:
-                true_neg += 1
-            if res == 0 and label == 1:
-                false_neg += 1
-            if res == 1 and label == 0:
-                false_pos += 1
-            if res == 1 and label == 1:
-                true_pos += 1
 
-    print(accuracy(), error())
+    y_pred = [svm.classify(features) for features, label in zip(test[0], test[1])]
+    y_true = df['GO:Process ID'].tail(int(rows * 0.1))
+    accuracy = accuracy_score(y_true, y_pred, normalize=False)
