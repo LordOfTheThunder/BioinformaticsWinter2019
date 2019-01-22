@@ -3,12 +3,6 @@ title: "HW4 - Gene expression - Clustering and Enrichment"
 output: pdf_document
 ---
 
-```
-install.packages('tinytex')
-tinytex::install_tinytex()
-tinytex::pdflatex('HW4_2019_template.tex')
-```
-
 ```{r init, include=F}
 library(knitr)
 opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
@@ -19,6 +13,7 @@ theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
 Submitted by:  
 ID1: 320983216
 Name1: Maxim Kolchinsky
+
 ID2: 321340580
 Name2: Anna Romanov
 
