@@ -173,10 +173,7 @@ plot_heatmap <- function(km) {
 # cluster the samples
 rawcounts_clean <- rawcounts_RN[ rawcounts_RN$sum >= 10, ]
 rawcounts_log = log10(1+rawcounts_clean)
-DE_res <- read_csv("data/sigresults.csv")
-DE_genes <- DE_res$row
-dat_filtered = rawcounts_log[DE_genes,]
-km <- kmeans(t(dat_filtered),5)
+km <- kmeans(t(rawcounts_log),5)
 #km$centers
 table(km$cluster)
 plot_heatmap(km)
