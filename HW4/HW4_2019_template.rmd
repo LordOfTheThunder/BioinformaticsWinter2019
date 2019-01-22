@@ -3,6 +3,12 @@ title: "HW4 - Gene expression - Clustering and Enrichment"
 output: pdf_document
 ---
 
+```
+install.packages('tinytex')
+tinytex::install_tinytex()
+tinytex::pdflatex('HW4_2019_template.tex')
+```
+
 ```{r init, include=F}
 library(knitr)
 opts_chunk$set(message=FALSE, warning=FALSE, eval=TRUE, echo=TRUE, cache=TRUE)
@@ -12,7 +18,7 @@ theme_set(theme_bw(base_size=16) + theme(strip.background = element_blank()))
 ```
 Submitted by:  
 ID1: 320983216
-Name1: Maxim Kolchinsky  
+Name1: Maxim Kolchinsky
 ID2: 321340580
 Name2: Anna Romanov
 
@@ -99,11 +105,9 @@ plot_heatmap(km)
 # remove rows of zeroes
 rawcounts_RN$sum <- rowSums(rawcounts_RN)
 rawcounts_clean <- rawcounts_RN[ rawcounts_RN$sum >= 10, ]
-rawcounts_clean
 rawcounts_clean$sum <- NULL
 
 # apply log scaling
-rawcounts_RN
 rawcounts_log = log10(1+rawcounts_clean)
 km <- kmeans(rawcounts_log,5)
 km$centers
@@ -183,6 +187,7 @@ table(km$cluster)
 plot_heatmap(km)
 
 ```
+
 
 # Record `sessionInfo()`
 
