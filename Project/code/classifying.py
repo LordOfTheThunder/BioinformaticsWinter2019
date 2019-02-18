@@ -1,14 +1,14 @@
 import pandas as pd
 from sklearn.metrics import accuracy_score, recall_score, precision_score
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.model_selection import train_test_split
 import warnings
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import StandardScaler
-
+from sklearn.preprocessing import StandardScaler, FunctionTransformer
+import numpy as np
 from sklearn import svm
-
-from svm import svm_classifier
 
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
@@ -40,15 +40,38 @@ if __name__ == "__main__":
     X_test = test[samples]
     y_test = test['label']
 
-    # Create a simple classifier
-    clf = DecisionTreeClassifier(class_weight='balanced')
+    # Standardize
+    scaler = StandardScaler().fit(X_train)
+    X_train = scaler.transform(X_train)
+    X_test = scaler.transform(X_test)
+
+    # log-scale
+    # log_transform = FunctionTransformer(np.log1p)
+    # X_train = log_transform.transform(X_train)
+    # X_test = log_transform.transform(X_test)
+
+    # Create decision tree
+    clf = DecisionTreeClassifier()
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
+    # Create random forest
+    rf = RandomForestClassifier()
+    rf.fit(X_train, y_train)
+    y_pred_rf = rf.predict(X_test)
+
+    ab = AdaBoostClassifier()
+    ab.fit(X_train, y_train)
+    y_pred_ab = ab.predict(X_test)
+
     # Classify with SVM
-    clf = svm.LinearSVC(class_weight='balanced')
-    svm = svm_classifier(X_train, y_train, clf)
+    clf = svm.LinearSVC()
+    clf.fit(X_train, y_train)
     y_pred_svm = clf.predict(X_test)
+
+    clf = svm.SVC()
+    clf.fit(X_train, y_train)
+    y_pred_svc = clf.predict(X_test)
 
     # Classify with KNN
     clf = KNeighborsClassifier(n_neighbors=3)
@@ -60,10 +83,25 @@ if __name__ == "__main__":
     print("recall score: ", recall_score(y_test, y_pred))
     print("precision score: ", precision_score(y_test, y_pred))
 
+    print("Random Forest")
+    print("accuracy score: ", accuracy_score(y_test, y_pred_rf))
+    print("recall score: ", recall_score(y_test, y_pred_rf))
+    print("precision score: ", precision_score(y_test, y_pred_rf))
+
+    print("AdaBoost")
+    print("accuracy score: ", accuracy_score(y_test, y_pred_ab))
+    print("recall score: ", recall_score(y_test, y_pred_ab))
+    print("precision score: ", precision_score(y_test, y_pred_ab))
+
     print("SVM")
     print("accuracy score: ", accuracy_score(y_test, y_pred_svm))
     print("recall score: ", recall_score(y_test, y_pred_svm))
     print("precision score: ", precision_score(y_test, y_pred_svm))
+
+    print("SVC")
+    print("accuracy score: ", accuracy_score(y_test, y_pred_svc))
+    print("recall score: ", recall_score(y_test, y_pred_svc))
+    print("precision score: ", precision_score(y_test, y_pred_svc))
 
     print("KNN with N=3")
     print("accuracy score: ", accuracy_score(y_test, y_pred_knn))
