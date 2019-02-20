@@ -1,199 +1,199 @@
-,go_term,count
-0,GO:0006915,524
-1,GO:0043066,458
-2,GO:0043065,306
-3,GO:0042981,187
-4,GO:0043524,129
-5,GO:0097190,67
-6,GO:0097191,45
-7,GO:0008630,44
-8,GO:0043525,43
-9,GO:0008625,40
-10,GO:2001237,38
-11,GO:0070059,35
-12,GO:1902042,34
-13,GO:0051402,33
-14,GO:0097192,33
-15,GO:2001240,31
-16,GO:0090200,31
-17,GO:2001244,31
-18,GO:0042771,29
-19,GO:0097193,28
-20,GO:1900740,28
-21,GO:2000352,25
-22,GO:0072332,25
-23,GO:2001238,24
-24,GO:0006921,20
-25,GO:0043523,20
-26,GO:2001243,19
-27,GO:1902236,19
-28,GO:0008637,17
-29,GO:0090201,17
-30,GO:1902041,17
-31,GO:2000811,16
-32,GO:0097194,15
-33,GO:0008631,15
-34,GO:0006309,15
-35,GO:1902230,14
-36,GO:2000353,14
-37,GO:0097284,14
-38,GO:2001241,14
-39,GO:1902043,14
-40,GO:0010667,13
-41,GO:1902166,12
-42,GO:0032060,11
-43,GO:0042535,10
-44,GO:0001916,10
-45,GO:0043281,10
-46,GO:0030261,9
-47,GO:0043653,9
-48,GO:2000270,8
-49,GO:0002903,8
-50,GO:1902237,8
-51,GO:1900119,8
-52,GO:0010656,7
-53,GO:2000210,7
-54,GO:0034393,7
-55,GO:0001783,7
-56,GO:0034351,7
-57,GO:0070233,7
-58,GO:0070234,7
-59,GO:0010659,6
-60,GO:0034349,6
-61,GO:0034392,6
-62,GO:0001844,6
-63,GO:2000271,6
-64,GO:0042536,6
-65,GO:0010666,6
-66,GO:2000107,6
-67,GO:0060561,6
-68,GO:0001913,6
-69,GO:1902231,6
-70,GO:2001054,6
-71,GO:0030263,5
-72,GO:0030262,5
-73,GO:0070244,5
-74,GO:0070245,5
-75,GO:0006924,5
-76,GO:0033033,5
-77,GO:1902262,5
-78,GO:0070242,5
-79,GO:1900118,5
-80,GO:0072577,5
-81,GO:0008628,5
-82,GO:2000110,5
-83,GO:0001915,5
-84,GO:0012501,5
-85,GO:0002906,4
-86,GO:2000676,4
-87,GO:0070231,4
-88,GO:0043276,4
-89,GO:0008626,4
-90,GO:1902108,4
-91,GO:2000672,4
-92,GO:2001236,4
-93,GO:1903377,4
-94,GO:2000670,4
-95,GO:2000675,4
-96,GO:1902254,4
-97,GO:1902510,3
-98,GO:1903984,3
-99,GO:2000669,3
-100,GO:0060058,3
-101,GO:0060139,3
-102,GO:0010664,3
-103,GO:0044346,3
-104,GO:1902263,3
-105,GO:0002904,3
-106,GO:0002902,3
-107,GO:0070268,3
-108,GO:0036462,3
-109,GO:2000111,3
-110,GO:0044336,3
-111,GO:2001242,3
-112,GO:0003278,3
-113,GO:0070236,3
-114,GO:1903378,3
-115,GO:0071866,3
-116,GO:0070232,3
-117,GO:1902174,3
-118,GO:0001781,3
-119,GO:1900212,3
-120,GO:1903298,3
-121,GO:2001271,3
-122,GO:1903384,3
-123,GO:0061364,3
-124,GO:1902109,2
-125,GO:0033025,2
-126,GO:0001914,2
-127,GO:0033031,2
-128,GO:0019050,2
-129,GO:1902512,2
-130,GO:0097050,2
-131,GO:0042534,2
-132,GO:0060623,2
-133,GO:0071888,2
-134,GO:1905259,2
-135,GO:1902235,2
-136,GO:0097049,2
-137,GO:0006925,2
-138,GO:0070230,2
-139,GO:0033026,2
-140,GO:1902257,2
-141,GO:0030264,2
-142,GO:2000269,2
-143,GO:1904193,2
-144,GO:1902255,2
-145,GO:2001055,2
-146,GO:1900215,2
-147,GO:1900218,2
-148,GO:0072305,2
-149,GO:0036481,2
-150,GO:0033032,2
-151,GO:1902742,2
-152,GO:1904037,2
-153,GO:0043366,2
-154,GO:0097252,2
-155,GO:1902172,2
-156,GO:0033034,1
-157,GO:2000209,1
-158,GO:1902253,1
-159,GO:0033028,1
-160,GO:1902110,1
-161,GO:0071839,1
-162,GO:0070247,1
-163,GO:0072040,1
-164,GO:1990144,1
-165,GO:0070228,1
-166,GO:1902511,1
-167,GO:0010657,1
-168,GO:1902251,1
-169,GO:1902362,1
-170,GO:2001239,1
-171,GO:0035602,1
-172,GO:1902178,1
-173,GO:1900142,1
-174,GO:0044337,1
-175,GO:1990774,1
-176,GO:0061296,1
-177,GO:1902165,1
-178,GO:0033030,1
-179,GO:2000671,1
-180,GO:1904651,1
-181,GO:0070241,1
-182,GO:2000108,1
-183,GO:1903122,1
-184,GO:1904635,1
-185,GO:0070235,1
-186,GO:2001272,1
-187,GO:0008627,1
-188,GO:1902173,1
-189,GO:0033668,1
-190,GO:0034391,1
-191,GO:0097152,1
-192,GO:1900117,1
-193,GO:2000109,1
-194,GO:2000351,1
-195,GO:0070237,1
-196,GO:1902256,1
-197,GO:0045556,1
+,go_term,count,term_name
+0,GO:0006915,524,apoptotic process
+1,GO:0043066,458,negative regulation of apoptotic process
+2,GO:0043065,306,positive regulation of apoptotic process
+3,GO:0042981,187,regulation of apoptotic process
+4,GO:0043524,129,negative regulation of neuron apoptotic process
+5,GO:0097190,67,apoptotic signaling pathway
+6,GO:0097191,45,extrinsic apoptotic signaling pathway
+7,GO:0008630,44,intrinsic apoptotic signaling pathway in response to DNA damage
+8,GO:0043525,43,positive regulation of neuron apoptotic process
+9,GO:0008625,40,extrinsic apoptotic signaling pathway via death domain receptors
+10,GO:2001237,38,negative regulation of extrinsic apoptotic signaling pathway
+11,GO:0070059,35,intrinsic apoptotic signaling pathway in response to endoplasmic reticulum stress
+12,GO:1902042,34,negative regulation of extrinsic apoptotic signaling pathway via death domain receptors
+13,GO:0051402,33,neuron apoptotic process
+14,GO:0097192,33,extrinsic apoptotic signaling pathway in absence of ligand
+15,GO:2001240,31,negative regulation of extrinsic apoptotic signaling pathway in absence of ligand
+16,GO:0090200,31,positive regulation of release of cytochrome c from mitochondria
+17,GO:2001244,31,positive regulation of intrinsic apoptotic signaling pathway
+18,GO:0042771,29,intrinsic apoptotic signaling pathway in response to DNA damage by p53 class mediator
+19,GO:0097193,28,intrinsic apoptotic signaling pathway
+20,GO:1900740,28,positive regulation of protein insertion into mitochondrial membrane involved in apoptotic signaling pathway
+21,GO:2000352,25,negative regulation of endothelial cell apoptotic process
+22,GO:0072332,25,intrinsic apoptotic signaling pathway by p53 class mediator
+23,GO:2001238,24,positive regulation of extrinsic apoptotic signaling pathway
+24,GO:0006921,20,cellular component disassembly involved in execution phase of apoptosis
+25,GO:0043523,20,regulation of neuron apoptotic process
+26,GO:2001243,19,negative regulation of intrinsic apoptotic signaling pathway
+27,GO:1902236,19,negative regulation of endoplasmic reticulum stress-induced intrinsic apoptotic signaling pathway
+28,GO:0008637,17,apoptotic mitochondrial changes
+29,GO:0090201,17,negative regulation of release of cytochrome c from mitochondria
+30,GO:1902041,17,regulation of extrinsic apoptotic signaling pathway via death domain receptors
+31,GO:2000811,16,negative regulation of anoikis
+32,GO:0097194,15,execution phase of apoptosis
+33,GO:0008631,15,intrinsic apoptotic signaling pathway in response to oxidative stress
+34,GO:0006309,15,apoptotic DNA fragmentation
+35,GO:1902230,14,negative regulation of intrinsic apoptotic signaling pathway in response to DNA damage
+36,GO:2000353,14,positive regulation of endothelial cell apoptotic process
+37,GO:0097284,14,hepatocyte apoptotic process
+38,GO:2001241,14,positive regulation of extrinsic apoptotic signaling pathway in absence of ligand
+39,GO:1902043,14,positive regulation of extrinsic apoptotic signaling pathway via death domain receptors
+40,GO:0010667,13,negative regulation of cardiac muscle cell apoptotic process
+41,GO:1902166,12,negative regulation of intrinsic apoptotic signaling pathway in response to DNA damage by p53 class mediator
+42,GO:0032060,11,bleb assembly
+43,GO:0042535,10,positive regulation of tumor necrosis factor biosynthetic process
+44,GO:0001916,10,positive regulation of T cell mediated cytotoxicity
+45,GO:0043281,10,regulation of cysteine-type endopeptidase activity involved in apoptotic process
+46,GO:0030261,9,chromosome condensation
+47,GO:0043653,9,mitochondrial fragmentation involved in apoptotic process
+48,GO:2000270,8,negative regulation of fibroblast apoptotic process
+49,GO:0002903,8,negative regulation of B cell apoptotic process
+50,GO:1902237,8,positive regulation of endoplasmic reticulum stress-induced intrinsic apoptotic signaling pathway
+51,GO:1900119,8,positive regulation of execution phase of apoptosis
+52,GO:0010656,7,negative regulation of muscle cell apoptotic process
+53,GO:2000210,7,positive regulation of anoikis
+54,GO:0034393,7,positive regulation of smooth muscle cell apoptotic process
+55,GO:0001783,7,B cell apoptotic process
+56,GO:0034351,7,negative regulation of glial cell apoptotic process
+57,GO:0070233,7,negative regulation of T cell apoptotic process
+58,GO:0070234,7,positive regulation of T cell apoptotic process
+59,GO:0010659,6,cardiac muscle cell apoptotic process
+60,GO:0034349,6,glial cell apoptotic process
+61,GO:0034392,6,negative regulation of smooth muscle cell apoptotic process
+62,GO:0001844,6,protein insertion into mitochondrial membrane involved in apoptotic signaling pathway
+63,GO:2000271,6,positive regulation of fibroblast apoptotic process
+64,GO:0042536,6,negative regulation of tumor necrosis factor biosynthetic process
+65,GO:0010666,6,positive regulation of cardiac muscle cell apoptotic process
+66,GO:2000107,6,negative regulation of leukocyte apoptotic process
+67,GO:0060561,6,apoptotic process involved in morphogenesis
+68,GO:0001913,6,T cell mediated cytotoxicity
+69,GO:1902231,6,positive regulation of intrinsic apoptotic signaling pathway in response to DNA damage
+70,GO:2001054,6,negative regulation of mesenchymal cell apoptotic process
+71,GO:0030263,5,apoptotic chromosome condensation
+72,GO:0030262,5,apoptotic nuclear changes
+73,GO:0070244,5,negative regulation of thymocyte apoptotic process
+74,GO:0070245,5,positive regulation of thymocyte apoptotic process
+75,GO:0006924,5,activation-induced cell death of T cells
+76,GO:0033033,5,negative regulation of myeloid cell apoptotic process
+77,GO:1902262,5,apoptotic process involved in patterning of blood vessels
+78,GO:0070242,5,thymocyte apoptotic process
+79,GO:1900118,5,negative regulation of execution phase of apoptosis
+80,GO:0072577,5,endothelial cell apoptotic process
+81,GO:0008628,5,hormone-mediated apoptotic signaling pathway
+82,GO:2000110,5,negative regulation of macrophage apoptotic process
+83,GO:0001915,5,negative regulation of T cell mediated cytotoxicity
+84,GO:0012501,5,programmed cell death
+85,GO:0002906,4,negative regulation of mature B cell apoptotic process
+86,GO:2000676,4,positive regulation of type B pancreatic cell apoptotic process
+87,GO:0070231,4,T cell apoptotic process
+88,GO:0043276,4,anoikis
+89,GO:0008626,4,granzyme-mediated apoptotic signaling pathway
+90,GO:1902108,4,regulation of mitochondrial membrane permeability involved in apoptotic process
+91,GO:2000672,4,negative regulation of motor neuron apoptotic process
+92,GO:2001236,4,regulation of extrinsic apoptotic signaling pathway
+93,GO:1903377,4,negative regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway
+94,GO:2000670,4,positive regulation of dendritic cell apoptotic process
+95,GO:2000675,4,negative regulation of type B pancreatic cell apoptotic process
+96,GO:1902254,4,negative regulation of intrinsic apoptotic signaling pathway by p53 class mediator
+97,GO:1902510,3,regulation of apoptotic DNA fragmentation
+98,GO:1903984,3,positive regulation of TRAIL-activated apoptotic signaling pathway
+99,GO:2000669,3,negative regulation of dendritic cell apoptotic process
+100,GO:0060058,3,positive regulation of apoptotic process involved in mammary gland involution
+101,GO:0060139,3,positive regulation of apoptotic process by virus
+102,GO:0010664,3,negative regulation of striated muscle cell apoptotic process
+103,GO:0044346,3,fibroblast apoptotic process
+104,GO:1902263,3,apoptotic process involved in embryonic digit morphogenesis
+105,GO:0002904,3,positive regulation of B cell apoptotic process
+106,GO:0002902,3,regulation of B cell apoptotic process
+107,GO:0070268,3,cornification
+108,GO:0036462,3,TRAIL-activated apoptotic signaling pathway
+109,GO:2000111,3,positive regulation of macrophage apoptotic process
+110,GO:0044336,3,canonical Wnt signaling pathway involved in negative regulation of apoptotic process
+111,GO:2001242,3,regulation of intrinsic apoptotic signaling pathway
+112,GO:0003278,3,apoptotic process involved in heart morphogenesis
+113,GO:0070236,3,negative regulation of activation-induced cell death of T cells
+114,GO:1903378,3,positive regulation of oxidative stress-induced neuron intrinsic apoptotic signaling pathway
+115,GO:0071866,3,negative regulation of apoptotic process in bone marrow
+116,GO:0070232,3,regulation of T cell apoptotic process
+117,GO:1902174,3,positive regulation of keratinocyte apoptotic process
+118,GO:0001781,3,neutrophil apoptotic process
+119,GO:1900212,3,negative regulation of mesenchymal cell apoptotic process involved in metanephros development
+120,GO:1903298,3,negative regulation of hypoxia-induced intrinsic apoptotic signaling pathway
+121,GO:2001271,3,negative regulation of cysteine-type endopeptidase activity involved in execution phase of apoptosis
+122,GO:1903384,3,negative regulation of hydrogen peroxide-induced neuron intrinsic apoptotic signaling pathway
+123,GO:0061364,3,apoptotic process involved in luteolysis
+124,GO:1902109,2,negative regulation of mitochondrial membrane permeability involved in apoptotic process
+125,GO:0033025,2,regulation of mast cell apoptotic process
+126,GO:0001914,2,regulation of T cell mediated cytotoxicity
+127,GO:0033031,2,positive regulation of neutrophil apoptotic process
+128,GO:0019050,2,suppression by virus of host apoptotic process
+129,GO:1902512,2,positive regulation of apoptotic DNA fragmentation
+130,GO:0097050,2,type B pancreatic cell apoptotic process
+131,GO:0042534,2,regulation of tumor necrosis factor biosynthetic process
+132,GO:0060623,2,regulation of chromosome condensation
+133,GO:0071888,2,macrophage apoptotic process
+134,GO:1905259,2,negative regulation of nitrosative stress-induced intrinsic apoptotic signaling pathway
+135,GO:1902235,2,regulation of endoplasmic reticulum stress-induced intrinsic apoptotic signaling pathway
+136,GO:0097049,2,motor neuron apoptotic process
+137,GO:0006925,2,inflammatory cell apoptotic process
+138,GO:0070230,2,positive regulation of lymphocyte apoptotic process
+139,GO:0033026,2,negative regulation of mast cell apoptotic process
+140,GO:1902257,2,negative regulation of apoptotic process involved in outflow tract morphogenesis
+141,GO:0030264,2,nuclear fragmentation involved in apoptotic nuclear change
+142,GO:2000269,2,regulation of fibroblast apoptotic process
+143,GO:1904193,2,negative regulation of cholangiocyte apoptotic process
+144,GO:1902255,2,positive regulation of intrinsic apoptotic signaling pathway by p53 class mediator
+145,GO:2001055,2,positive regulation of mesenchymal cell apoptotic process
+146,GO:1900215,2,negative regulation of apoptotic process involved in metanephric collecting duct development
+147,GO:1900218,2,negative regulation of apoptotic process involved in metanephric nephron tubule development
+148,GO:0072305,2,negative regulation of mesenchymal cell apoptotic process involved in metanephric nephron morphogenesis
+149,GO:0036481,2,intrinsic apoptotic signaling pathway in response to hydrogen peroxide
+150,GO:0033032,2,regulation of myeloid cell apoptotic process
+151,GO:1902742,2,apoptotic process involved in development
+152,GO:1904037,2,positive regulation of epithelial cell apoptotic process
+153,GO:0043366,2,beta selection
+154,GO:0097252,2,oligodendrocyte apoptotic process
+155,GO:1902172,2,regulation of keratinocyte apoptotic process
+156,GO:0033034,1,positive regulation of myeloid cell apoptotic process
+157,GO:2000209,1,regulation of anoikis
+158,GO:1902253,1,regulation of intrinsic apoptotic signaling pathway by p53 class mediator
+159,GO:0033028,1,myeloid cell apoptotic process
+160,GO:1902110,1,positive regulation of mitochondrial membrane permeability involved in apoptotic process
+161,GO:0071839,1,apoptotic process in bone marrow
+162,GO:0070247,1,regulation of natural killer cell apoptotic process
+163,GO:0072040,1,negative regulation of mesenchymal cell apoptotic process involved in nephron morphogenesis
+164,GO:1990144,1,intrinsic apoptotic signaling pathway in response to hypoxia
+165,GO:0070228,1,regulation of lymphocyte apoptotic process
+166,GO:1902511,1,negative regulation of apoptotic DNA fragmentation
+167,GO:0010657,1,muscle cell apoptotic process
+168,GO:1902251,1,negative regulation of erythrocyte apoptotic process
+169,GO:1902362,1,melanocyte apoptotic process
+170,GO:2001239,1,regulation of extrinsic apoptotic signaling pathway in absence of ligand
+171,GO:0035602,1,fibroblast growth factor receptor signaling pathway involved in negative regulation of apoptotic process in bone marrow
+172,GO:1902178,1,fibroblast growth factor receptor apoptotic signaling pathway
+173,GO:1900142,1,negative regulation of oligodendrocyte apoptotic process
+174,GO:0044337,1,canonical Wnt signaling pathway involved in positive regulation of apoptotic process
+175,GO:1990774,1,tumor necrosis factor secretion
+176,GO:0061296,1,negative regulation of mesenchymal cell apoptotic process involved in mesonephric nephron morphogenesis
+177,GO:1902165,1,regulation of intrinsic apoptotic signaling pathway in response to DNA damage by p53 class mediator
+178,GO:0033030,1,negative regulation of neutrophil apoptotic process
+179,GO:2000671,1,regulation of motor neuron apoptotic process
+180,GO:1904651,1,positive regulation of fat cell apoptotic process
+181,GO:0070241,1,positive regulation of activated T cell autonomous cell death
+182,GO:2000108,1,positive regulation of leukocyte apoptotic process
+183,GO:1903122,1,negative regulation of TRAIL-activated apoptotic signaling pathway
+184,GO:1904635,1,positive regulation of glomerular visceral epithelial cell apoptotic process
+185,GO:0070235,1,regulation of activation-induced cell death of T cells
+186,GO:2001272,1,positive regulation of cysteine-type endopeptidase activity involved in execution phase of apoptosis
+187,GO:0008627,1,intrinsic apoptotic signaling pathway in response to osmotic stress
+188,GO:1902173,1,negative regulation of keratinocyte apoptotic process
+189,GO:0033668,1,negative regulation by symbiont of host apoptotic process
+190,GO:0034391,1,regulation of smooth muscle cell apoptotic process
+191,GO:0097152,1,mesenchymal cell apoptotic process
+192,GO:1900117,1,regulation of execution phase of apoptosis
+193,GO:2000109,1,regulation of macrophage apoptotic process
+194,GO:2000351,1,regulation of endothelial cell apoptotic process
+195,GO:0070237,1,positive regulation of activation-induced cell death of T cells
+196,GO:1902256,1,regulation of apoptotic process involved in outflow tract morphogenesis
+197,GO:0045556,1,positive regulation of TRAIL biosynthetic process
