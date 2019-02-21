@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from  matplotlib import colors
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
+from collections import Counter, defaultdict
+import operator
 
 # ideas to remember: "help" the algorithm by filtering differentially expressed genes, create two features
 # which will be the avg of the expression data, one for treated and one for non-treated
@@ -28,6 +30,11 @@ filtered_gene_exp = df[df['apoptosis_related'] == True]
 
 model = KMeans(n_clusters=5)
 clusters = model.fit_predict(gene_exp)
+res_dict = Counter(clusters)
+sorted_res_dict = sorted(res_dict.items(), key=operator.itemgetter(1), reverse=True)
+print('Elements per cluster')
+print(sorted_res_dict)
+
 predict_true = list(model.predict(filtered_gene_exp[samples]))
 count_list = [predict_true.count(i) for i in range(model.n_clusters)]
 accuracy = max(count_list) / len(predict_true)
