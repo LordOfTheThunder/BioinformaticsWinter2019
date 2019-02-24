@@ -57,15 +57,16 @@ def calc_clusters():
 
 
 if __name__ == '__main__':
-    # train = pd.read_csv("train_mean.csv")
-    # test = pd.read_csv("test_mean.csv")
+    train = pd.read_csv("train_mean.csv")
+    test = pd.read_csv("test_mean.csv")
 
     data = pd.read_csv("data_labeled.csv")
 
     # Perform normalization
-    # data[samples] = StandardScaler().fit_transform(data[samples])
-    # train[samples] = scaler.transform(train[samples])
-    # test[samples] = scaler.transform(test[samples])
+    scaler = StandardScaler()
+    data[samples] = scaler.fit_transform(data[samples])
+    train[samples] = scaler.transform(train[samples])
+    test[samples] = scaler.transform(test[samples])
 
     # OR: Apply min-max scaler (comment out the unnecessary one)
     # scaler = MinMaxScaler(feature_range=(0, 1)).fit(train[samples])
@@ -73,11 +74,11 @@ if __name__ == '__main__':
     # test[samples] = scaler.transform(test[samples])
 
     # compute variance of each row
-    # var = train.var(axis=1, numeric_only=True)
-    # train['var'] = var
-    #
-    # var = test.var(axis=1, numeric_only=True)
-    # test['var'] = var
+    var = train.var(axis=1, numeric_only=True)
+    train['var'] = var
+
+    var = test.var(axis=1, numeric_only=True)
+    test['var'] = var
    # print(train)
     var = data.var(axis=1, numeric_only=True)
     data['var'] = var
@@ -87,28 +88,48 @@ if __name__ == '__main__':
 
     # train = train[train['var'] > 0.005]
     # test = test[test['var'] > 0.005]
+    acc_results, recall_results, prec_results = [], [], []
+    x_values = [0.001, 0.005, 0.01, 0.05, 0.07, 0.08]
+    for val in x_values:
+        # data = data[data['var'] > .2e7]
+        data_tmp = data[data['var'] > val]
 
-    data = data[data['var'] > .2e7]
+        # print("after filtering, train size is: ", len(train), " test size is: ", len(test))
+        # print("TRUE in train size: ", len(train[train['label'] == True]),
+        #       "TRUE in test size: ", len(test[test['label'] == True]))
 
-    # print("after filtering, train size is: ", len(train), " test size is: ", len(test))
-    # print("TRUE in train size: ", len(train[train['label'] == True]),
-    #       "TRUE in test size: ", len(test[test['label'] == True]))
+        labels = data_tmp['apoptosis_related']
+        X_train, X_test, y_train, y_test = train_test_split(data_tmp[samples], labels, test_size=.3, stratify=labels)
 
-    labels = data['apoptosis_related']
-    X_train, X_test, y_train, y_test = train_test_split(data[samples], labels, test_size=.3, stratify=labels)
+        print("after filtering, train size is: ", len(X_train), " test size is: ", len(X_test))
 
-    print("after filtering, train size is: ", len(X_train), " test size is: ", len(X_test))
+        # Create decision tree
+        clf = DecisionTreeClassifier()
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
 
-    # Create decision tree
-    clf = DecisionTreeClassifier()
-    clf.fit(X_train, y_train)
-    y_pred = clf.predict(X_test)
+        acc_score = accuracy_score(y_test, y_pred)
+        rec_score = recall_score(y_test, y_pred)
+        prec_score = precision_score(y_test, y_pred)
 
-    print("Decision Tree")
-    print("accuracy score: ", accuracy_score(y_test, y_pred))
-    print("recall score: ", recall_score(y_test, y_pred))
-    print("precision score: ", precision_score(y_test, y_pred))
+        print("Decision Tree")
+        print("accuracy score: ", acc_score)
+        print("recall score: ", rec_score)
+        print("precision score: ", prec_score)
 
+        acc_results.append(acc_score)
+        recall_results.append(rec_score)
+        prec_results.append(prec_score)
+
+    plt.title('Score as a function of filtering variance')
+    plt.grid(True)
+    plt.xlabel('variance filter')
+    plt.ylabel('score')
+    plt.plot(x_values, acc_results, 'r', label="accuracy")
+    plt.plot(x_values, recall_results, 'b', label="recall")
+    plt.plot(x_values, prec_results, 'g', label="precision")
+    plt.legend()
+    plt.show()
     # X_train = X_train.assign(label = y_train)
     # X_train.to_csv('train_filtered.csv')
     #
