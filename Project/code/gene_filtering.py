@@ -64,31 +64,29 @@ if __name__ == '__main__':
     scaler = StandardScaler().fit(train[samples])
     train[samples] = scaler.transform(train[samples])
     test[samples] = scaler.transform(test[samples])
-    test[samples] = scaler.transform(test[samples])
+
+    X_test = test[samples]
+    y_test = test['label']
 
     # compute variance of each row
     var = train[samples].var(axis=1, numeric_only=True)
     train['var'] = var
+    print(train)
+
+    print(test)
+
     print("before filtering, train size is: ", len(train), " test size is: ", len(test))
     acc_results, recall_results, prec_results = [], [], []
     x_values = [0.001, 0.005, 0.01, 0.05, 0.07, 0.08]
     for val in x_values:
-        data_tmp = data[data['var'] > val]
+        train_tmp = train[train['var'] > val]
 
-        # print("after filtering, train size is: ", len(train), " test size is: ", len(test))
-        # print("TRUE in train size: ", len(train[train['label'] == True]),
-        #       "TRUE in test size: ", len(test[test['label'] == True]))
+        print("after filtering, train size is: ", len(train), " test size is: ", len(test))
+        print("TRUE in train size: ", len(train[train['label'] == True]),
+              "TRUE in test size: ", len(test[test['label'] == True]))
 
-
-        labels = data_tmp['apoptosis_related']
-        X_train, X_test, y_train, y_test = train_test_split(data_tmp[samples], labels, test_size=.3, stratify=labels)
-          "TRUE in test size: ", len(test[test['label'] == True]))
-
-        print("after filtering, train size is: ", len(X_train), " test size is: ", len(X_test))
-    y_train = train['label']
-    X_test = test[samples]
-    y_test = test['label']
-
+        X_train = train_tmp[samples]
+        y_train = train_tmp['label']
         # Create decision tree
         clf = DecisionTreeClassifier()
         clf.fit(X_train, y_train)
