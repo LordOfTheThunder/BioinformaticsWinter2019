@@ -41,9 +41,9 @@ if __name__ == "__main__":
     y_test = test['label']
 
     # Standardize
-    scaler = StandardScaler().fit(X_train)
-    X_train = scaler.transform(X_train)
-    X_test = scaler.transform(X_test)
+    # scaler = StandardScaler().fit(X_train)
+    # X_train = scaler.transform(X_train)
+    # X_test = scaler.transform(X_test)
 
     # log-scale
     # log_transform = FunctionTransformer(np.log1p)

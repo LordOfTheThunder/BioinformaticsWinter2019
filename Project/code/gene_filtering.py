@@ -60,48 +60,34 @@ if __name__ == '__main__':
     train = pd.read_csv("train_mean.csv")
     test = pd.read_csv("test_mean.csv")
 
-    data = pd.read_csv("data_labeled.csv")
-
     # Perform normalization
-    scaler = StandardScaler()
-    data[samples] = scaler.fit_transform(data[samples])
+    scaler = StandardScaler().fit(train[samples])
     train[samples] = scaler.transform(train[samples])
     test[samples] = scaler.transform(test[samples])
-
-    # OR: Apply min-max scaler (comment out the unnecessary one)
-    # scaler = MinMaxScaler(feature_range=(0, 1)).fit(train[samples])
-    # train[samples] = scaler.transform(train[samples])
-    # test[samples] = scaler.transform(test[samples])
+    test[samples] = scaler.transform(test[samples])
 
     # compute variance of each row
-    var = train.var(axis=1, numeric_only=True)
+    var = train[samples].var(axis=1, numeric_only=True)
     train['var'] = var
-
-    var = test.var(axis=1, numeric_only=True)
-    test['var'] = var
-   # print(train)
-    var = data.var(axis=1, numeric_only=True)
-    data['var'] = var
-    print(data)
-
-    # print("before filtering, train size is: ", len(train), " test size is: ", len(test))
-
-    # train = train[train['var'] > 0.005]
-    # test = test[test['var'] > 0.005]
+    print("before filtering, train size is: ", len(train), " test size is: ", len(test))
     acc_results, recall_results, prec_results = [], [], []
     x_values = [0.001, 0.005, 0.01, 0.05, 0.07, 0.08]
     for val in x_values:
-        # data = data[data['var'] > .2e7]
         data_tmp = data[data['var'] > val]
 
         # print("after filtering, train size is: ", len(train), " test size is: ", len(test))
         # print("TRUE in train size: ", len(train[train['label'] == True]),
         #       "TRUE in test size: ", len(test[test['label'] == True]))
 
+
         labels = data_tmp['apoptosis_related']
         X_train, X_test, y_train, y_test = train_test_split(data_tmp[samples], labels, test_size=.3, stratify=labels)
+          "TRUE in test size: ", len(test[test['label'] == True]))
 
         print("after filtering, train size is: ", len(X_train), " test size is: ", len(X_test))
+    y_train = train['label']
+    X_test = test[samples]
+    y_test = test['label']
 
         # Create decision tree
         clf = DecisionTreeClassifier()
@@ -130,10 +116,5 @@ if __name__ == '__main__':
     plt.plot(x_values, prec_results, 'g', label="precision")
     plt.legend()
     plt.show()
-    # X_train = X_train.assign(label = y_train)
-    # X_train.to_csv('train_filtered.csv')
-    #
-    # X_test = X_test.assign(label = y_test)
-    # X_test.to_csv('test_filtered.csv')
 
 
