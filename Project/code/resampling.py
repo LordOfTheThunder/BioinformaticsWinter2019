@@ -30,88 +30,94 @@ def oversample(df, coef):
 # TODO: uncomment the above lines instead of the ones below
 train = pd.read_csv("train_mean.csv")
 test = pd.read_csv("test_mean.csv")
-X_test = test[samples]
-y_test = test['label']
+
+def runTest(samples):
+    X_test = test[samples]
+    y_test = test['label']
+    acc_results, recall_results, prec_results = [], [], []
+    x_values = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    for val in x_values:
+        train_tmp = oversample(train, val)
+        print("coef is: ", val)
+        print("after oversampling, train size is: ", len(train))
+        print("TRUE in train size: ", len(train[train['label'] == True]))
+
+        X_train = train_tmp[samples]
+        y_train = train_tmp['label']
+
+        # Create decision tree
+        clf = DecisionTreeClassifier()
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
+
+        acc_score = accuracy_score(y_test, y_pred)
+        rec_score = recall_score(y_test, y_pred)
+        prec_score = precision_score(y_test, y_pred)
+
+        print("Decision Tree")
+        print("accuracy score: ", acc_score)
+        print("recall score: ", rec_score)
+        print("precision score: ", prec_score)
+
+        acc_results.append(acc_score)
+        recall_results.append(rec_score)
+        prec_results.append(prec_score)
+
+    plt.title('Score as a function of oversampling coefficient')
+    plt.grid(True)
+    plt.xlabel('variance filter')
+    plt.ylabel('score')
+    plt.plot(x_values, acc_results, 'r', label="accuracy")
+    plt.plot(x_values, recall_results, 'b', label="recall")
+    plt.plot(x_values, prec_results, 'g', label="precision")
+    plt.legend()
+    plt.show()
 
 
-acc_results, recall_results, prec_results = [], [], []
-x_values = [0.5, 0.6, 0.7, 0.8, 0.9, 1]
-for val in x_values:
-    train_tmp = oversample(train, val)
-    print("coef is: ", val)
-    print("after oversampling, train size is: ", len(train))
-    print("TRUE in train size: ", len(train[train['label'] == True]))
+    acc_results, recall_results, prec_results = [], [], []
+    x_values = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
+    for val in x_values:
+        train_tmp = undersample(train, val)
+        print("coef is: ", val)
+        print("after undersampling, train size is: ", len(train))
+        print("TRUE in train size: ", len(train[train['label'] == True]))
 
-    X_train = train_tmp[samples]
-    y_train = train_tmp['label']
+        X_train = train_tmp[samples]
+        y_train = train_tmp['label']
 
-    # Create decision tree
-    clf = DecisionTreeClassifier()
-    clf.fit(X_train, y_train)
-    y_pred = clf.predict(X_test)
+        # Create decision tree
+        clf = DecisionTreeClassifier()
+        clf.fit(X_train, y_train)
+        y_pred = clf.predict(X_test)
 
-    acc_score = accuracy_score(y_test, y_pred)
-    rec_score = recall_score(y_test, y_pred)
-    prec_score = precision_score(y_test, y_pred)
+        acc_score = accuracy_score(y_test, y_pred)
+        rec_score = recall_score(y_test, y_pred)
+        prec_score = precision_score(y_test, y_pred)
 
-    print("Decision Tree")
-    print("accuracy score: ", acc_score)
-    print("recall score: ", rec_score)
-    print("precision score: ", prec_score)
+        print("Decision Tree")
+        print("accuracy score: ", acc_score)
+        print("recall score: ", rec_score)
+        print("precision score: ", prec_score)
 
-    acc_results.append(acc_score)
-    recall_results.append(rec_score)
-    prec_results.append(prec_score)
+        acc_results.append(acc_score)
+        recall_results.append(rec_score)
+        prec_results.append(prec_score)
 
-plt.title('Score as a function of oversampling coefficient')
-plt.grid(True)
-plt.xlabel('variance filter')
-plt.ylabel('score')
-plt.plot(x_values, acc_results, 'r', label="accuracy")
-plt.plot(x_values, recall_results, 'b', label="recall")
-plt.plot(x_values, prec_results, 'g', label="precision")
-plt.legend()
-plt.show()
+    plt.title('Score as a function of undersampling coefficient')
+    plt.grid(True)
+    plt.xlabel('variance filter')
+    plt.ylabel('score')
+    plt.plot(x_values, acc_results, 'r', label="accuracy")
+    plt.plot(x_values, recall_results, 'b', label="recall")
+    plt.plot(x_values, prec_results, 'g', label="precision")
+    plt.legend()
+    plt.show()
 
-
-acc_results, recall_results, prec_results = [], [], []
-x_values = [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8]
-for val in x_values:
-    train_tmp = undersample(train, val)
-    print("coef is: ", val)
-    print("after undersampling, train size is: ", len(train))
-    print("TRUE in train size: ", len(train[train['label'] == True]))
-
-    X_train = train_tmp[samples]
-    y_train = train_tmp['label']
-
-    # Create decision tree
-    clf = DecisionTreeClassifier()
-    clf.fit(X_train, y_train)
-    y_pred = clf.predict(X_test)
-
-    acc_score = accuracy_score(y_test, y_pred)
-    rec_score = recall_score(y_test, y_pred)
-    prec_score = precision_score(y_test, y_pred)
-
-    print("Decision Tree")
-    print("accuracy score: ", acc_score)
-    print("recall score: ", rec_score)
-    print("precision score: ", prec_score)
-
-    acc_results.append(acc_score)
-    recall_results.append(rec_score)
-    prec_results.append(prec_score)
-
-plt.title('Score as a function of undersampling coefficient')
-plt.grid(True)
-plt.xlabel('variance filter')
-plt.ylabel('score')
-plt.plot(x_values, acc_results, 'r', label="accuracy")
-plt.plot(x_values, recall_results, 'b', label="recall")
-plt.plot(x_values, prec_results, 'g', label="precision")
-plt.legend()
-plt.show()
+runTest(samples)
+# Partial testing only on BT-549 cells
+runTest(samples[0:6])
+# Partial testing only on MDA-mB cells
+runTest(samples[7:12])
 
 # TODO: save the best configuration to file
 # best_train.to_csv('train_resampled.csv')
