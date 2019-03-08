@@ -57,8 +57,8 @@ def calc_clusters():
 
 
 if __name__ == '__main__':
-    train = pd.read_csv("train_mean.csv")
-    test = pd.read_csv("test_mean.csv")
+    train = pd.read_csv("train_mean_2.csv")
+    test = pd.read_csv("test_mean_2.csv")
 
     # Perform normalization
     scaler = StandardScaler().fit(train[samples])
@@ -71,18 +71,16 @@ if __name__ == '__main__':
     # compute variance of each row
     var = train[samples].var(axis=1, numeric_only=True)
     train['var'] = var
-    print(train)
-
-    print(test)
 
     print("before filtering, train size is: ", len(train), " test size is: ", len(test))
     acc_results, recall_results, prec_results = [], [], []
-    x_values = [0.001, 0.005, 0.01, 0.05, 0.07, 0.08]
+    x_values = [0, 0.00001, 0.00002, 0.00003, 0.00004, 0.00005, 0.0001]
+    train_size = []
     for val in x_values:
         train_tmp = train[train['var'] > val]
-
-        print("after filtering, train size is: ", len(train), " test size is: ", len(test))
-        print("TRUE in train size: ", len(train[train['label'] == True]),
+        print("Variance threshold: ", val)
+        print("after filtering, train size is: ", len(train_tmp), " test size is: ", len(test))
+        print("TRUE in train size: ", len(train_tmp[train_tmp['label'] == True]),
               "TRUE in test size: ", len(test[test['label'] == True]))
 
         X_train = train_tmp[samples]
@@ -104,19 +102,21 @@ if __name__ == '__main__':
         acc_results.append(acc_score)
         recall_results.append(rec_score)
         prec_results.append(prec_score)
+        train_size.append(len(train_tmp))
 
     plt.title('Score as a function of filtering variance')
     plt.grid(True)
     plt.xlabel('variance filter')
     plt.ylabel('score')
+    # plt.plot(x_values, train_size, 'y', label="train size")
     plt.plot(x_values, acc_results, 'r', label="accuracy")
     plt.plot(x_values, recall_results, 'b', label="recall")
     plt.plot(x_values, prec_results, 'g', label="precision")
     plt.legend()
     plt.show()
 
-    # TODO: save the best configuration to file
-    # best_train.to_csv('train_filtered.csv')
-    # test.to_csv('test_norm.csv')
+    best_train = train[train['var'] > 0.00005]
+    best_train.to_csv('train_filtered.csv')
+    test.to_csv('test_norm.csv')
 
 

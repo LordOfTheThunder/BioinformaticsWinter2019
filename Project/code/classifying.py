@@ -16,28 +16,51 @@ samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', '
 if __name__ == "__main__":
     # warnings.filterwarnings("ignore")
     #
-    # df = pd.read_csv("data_labeled.csv")
-    # data = df[df.columns[0:13]]
-    #
-    # print(data)
-    #
-    #
-    # labels = df['apoptosis_related']
-    #
-    # X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=.3, stratify=labels)
+    df = pd.read_csv("data_labeled.csv")
+    data = df[df.columns[0:13]]
+
+    labels = df['apoptosis_related']
+
+    # X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=.15, stratify=labels)
     #
     # X_train = X_train.assign(label = y_train)
-    # X_train.to_csv('train_probes.csv')
+    # X_train.to_csv('train_mean_2.csv')
     #
     # X_test = X_test.assign(label = y_test)
-    # X_test.to_csv('test_probes.csv')
+    # X_test.to_csv('test_mean_2.csv')
 
-    train = pd.read_csv("train_mean.csv")
-    X_train = train[samples]
+    # train = pd.read_csv("train_undersampled_05_.csv")
+    # train = pd.read_csv("train_undersampled_05_.csv")
+    train = pd.read_csv("train_oversampled_1.csv")
+    test = pd.read_csv("test_norm.csv")
+    # train = pd.read_csv("train_mean.csv")
+    # test = pd.read_csv("test_mean.csv")
+
+    diff_1 = train[samples[0]] - train[samples[3]]
+    diff_2 = train[samples[1]] - train[samples[4]]
+    diff_3 = train[samples[2]] - train[samples[5]]
+    diff_4 = train[samples[6]] - train[samples[9]]
+    diff_5 = train[samples[7]] - train[samples[10]]
+    diff_6 = train[samples[8]] - train[samples[11]]
+
+    diff_1_test = test[samples[0]] - test[samples[3]]
+    diff_2_test = test[samples[1]] - test[samples[4]]
+    diff_3_test = test[samples[2]] - test[samples[5]]
+    diff_4_test = test[samples[6]] - test[samples[9]]
+    diff_5_test = test[samples[7]] - test[samples[10]]
+    diff_6_test = test[samples[8]] - test[samples[11]]
+
+    data = {'diff_1': diff_1, 'diff_2': diff_2, 'diff_3': diff_3, 'diff_4': diff_4, 'diff_5': diff_5, 'diff_6': diff_6}
+    X_train = pd.DataFrame.from_dict(data)
+
+    # X_train = train[samples]
     y_train = train['label']
 
-    test = pd.read_csv("test_mean.csv")
-    X_test = test[samples]
+    data_ = {'diff_1': diff_1_test, 'diff_2': diff_2_test, 'diff_3': diff_3_test, 'diff_4': diff_4_test,
+             'diff_5': diff_5_test, 'diff_6': diff_6_test}
+    X_test = pd.DataFrame.from_dict(data_)
+
+    # X_test = test[samples]
     y_test = test['label']
 
     # Standardize
