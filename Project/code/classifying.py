@@ -36,31 +36,33 @@ if __name__ == "__main__":
     # train = pd.read_csv("train_mean.csv")
     # test = pd.read_csv("test_mean.csv")
 
-    diff_1 = train[samples[0]] - train[samples[3]]
-    diff_2 = train[samples[1]] - train[samples[4]]
-    diff_3 = train[samples[2]] - train[samples[5]]
-    diff_4 = train[samples[6]] - train[samples[9]]
-    diff_5 = train[samples[7]] - train[samples[10]]
-    diff_6 = train[samples[8]] - train[samples[11]]
+    # diff_1 = train[samples[0]] - train[samples[3]]
+    # diff_2 = train[samples[1]] - train[samples[4]]
+    # diff_3 = train[samples[2]] - train[samples[5]]
+    # diff_4 = train[samples[6]] - train[samples[9]]
+    # diff_5 = train[samples[7]] - train[samples[10]]
+    # diff_6 = train[samples[8]] - train[samples[11]]
+    #
+    # diff_1_test = test[samples[0]] - test[samples[3]]
+    # diff_2_test = test[samples[1]] - test[samples[4]]
+    # diff_3_test = test[samples[2]] - test[samples[5]]
+    # diff_4_test = test[samples[6]] - test[samples[9]]
+    # diff_5_test = test[samples[7]] - test[samples[10]]
+    # diff_6_test = test[samples[8]] - test[samples[11]]
+    #
+    # data = {'diff_1': diff_1, 'diff_2': diff_2, 'diff_3': diff_3, 'diff_4': diff_4, 'diff_5': diff_5, 'diff_6': diff_6}
+    # X_train = pd.DataFrame.from_dict(data)
+    #
+    # data_ = {'diff_1': diff_1_test, 'diff_2': diff_2_test, 'diff_3': diff_3_test, 'diff_4': diff_4_test,
+    #          'diff_5': diff_5_test, 'diff_6': diff_6_test}
+    # X_test = pd.DataFrame.from_dict(data_)
 
-    diff_1_test = test[samples[0]] - test[samples[3]]
-    diff_2_test = test[samples[1]] - test[samples[4]]
-    diff_3_test = test[samples[2]] - test[samples[5]]
-    diff_4_test = test[samples[6]] - test[samples[9]]
-    diff_5_test = test[samples[7]] - test[samples[10]]
-    diff_6_test = test[samples[8]] - test[samples[11]]
-
-    data = {'diff_1': diff_1, 'diff_2': diff_2, 'diff_3': diff_3, 'diff_4': diff_4, 'diff_5': diff_5, 'diff_6': diff_6}
-    X_train = pd.DataFrame.from_dict(data)
-
-    # X_train = train[samples]
+   # indices = [0, 1, 3,4, 6, 7, 9, 10]
+   #  X_train = train[[samples[i] for i in indices]]
+    X_train = train[samples]
+    # X_test = test[[samples[i] for i in indices]]
+    X_test = test[samples]
     y_train = train['label']
-
-    data_ = {'diff_1': diff_1_test, 'diff_2': diff_2_test, 'diff_3': diff_3_test, 'diff_4': diff_4_test,
-             'diff_5': diff_5_test, 'diff_6': diff_6_test}
-    X_test = pd.DataFrame.from_dict(data_)
-
-    # X_test = test[samples]
     y_test = test['label']
 
     # Standardize
@@ -74,7 +76,7 @@ if __name__ == "__main__":
     # X_test = log_transform.transform(X_test)
 
     # Create decision tree
-    clf = DecisionTreeClassifier()
+    clf = DecisionTreeClassifier(max_depth=70)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
@@ -88,7 +90,7 @@ if __name__ == "__main__":
     y_pred_ab = ab.predict(X_test)
 
     # Classify with SVM
-    clf = svm.LinearSVC()
+    clf = svm.LinearSVC(max_iter=10)
     clf.fit(X_train, y_train)
     y_pred_svm = clf.predict(X_test)
 
