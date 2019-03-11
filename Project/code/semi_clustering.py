@@ -38,8 +38,11 @@ for i in cluster_range:
     # res_kmeans.append(metrics.calinski_harabaz_score(gene_exp, clusters))
     # res_hierarchical.append(metrics.calinski_harabaz_score(gene_exp, hier_clusters))
 
-plt.plot(cluster_range, res_kmeans, 'r')
-plt.plot(cluster_range, res_hierarchical, 'g')
+plt.title('Silhouette score as a function of number of clusters')
+plt.plot(cluster_range, res_kmeans, 'r', label='KMeans')
+plt.plot(cluster_range, res_hierarchical, 'g', label='Hierarchical')
+plt.grid(True)
+plt.legend()
 plt.show()
 
 df = pd.read_csv('train_mean.csv')
