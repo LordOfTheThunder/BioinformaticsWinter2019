@@ -9,6 +9,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler, FunctionTransformer
 import numpy as np
 from sklearn import svm
+import matplotlib.pyplot as plt
 
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
@@ -80,58 +81,88 @@ if __name__ == "__main__":
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
+    dt_acc = accuracy_score(y_test, y_pred)
+    dt_rec = recall_score(y_test, y_pred)
+    dt_prec = precision_score(y_test, y_pred)
+
+    print("Decision Tree")
+    print("accuracy score: ", dt_acc)
+    print("recall score: ", dt_rec)
+    print("precision score: ", dt_prec)
+
+
     # Create random forest
-    rf = RandomForestClassifier()
-    rf.fit(X_train, y_train)
-    y_pred_rf = rf.predict(X_test)
-
-    ab = AdaBoostClassifier()
-    ab.fit(X_train, y_train)
-    y_pred_ab = ab.predict(X_test)
-
+    # rf = RandomForestClassifier()
+    # rf.fit(X_train, y_train)
+    # y_pred_rf = rf.predict(X_test)
+    #
+    # ab = AdaBoostClassifier()
+    # ab.fit(X_train, y_train)
+    # y_pred_ab = ab.predict(X_test)
+    #
     # Classify with SVM
-    clf = svm.LinearSVC(max_iter=10)
+    clf = svm.LinearSVC(max_iter=20)
     clf.fit(X_train, y_train)
     y_pred_svm = clf.predict(X_test)
 
-    clf = svm.SVC()
-    clf.fit(X_train, y_train)
-    y_pred_svc = clf.predict(X_test)
+    # clf = svm.SVC()
+    # clf.fit(X_train, y_train)
+    # y_pred_svc = clf.predict(X_test)
 
-    # Classify with KNN
-    clf = KNeighborsClassifier(n_neighbors=3)
-    clf.fit(X_train, y_train)
-    y_pred_knn = clf.predict(X_test)
-
-    print("Decision Tree")
-    print("accuracy score: ", accuracy_score(y_test, y_pred))
-    print("recall score: ", recall_score(y_test, y_pred))
-    print("precision score: ", precision_score(y_test, y_pred))
-
-    print("Random Forest")
-    print("accuracy score: ", accuracy_score(y_test, y_pred_rf))
-    print("recall score: ", recall_score(y_test, y_pred_rf))
-    print("precision score: ", precision_score(y_test, y_pred_rf))
-
-    print("AdaBoost")
-    print("accuracy score: ", accuracy_score(y_test, y_pred_ab))
-    print("recall score: ", recall_score(y_test, y_pred_ab))
-    print("precision score: ", precision_score(y_test, y_pred_ab))
+    svm_acc = accuracy_score(y_test, y_pred_svm)
+    svm_rec = recall_score(y_test, y_pred_svm)
+    svm_prec = precision_score(y_test, y_pred_svm)
 
     print("SVM")
-    print("accuracy score: ", accuracy_score(y_test, y_pred_svm))
-    print("recall score: ", recall_score(y_test, y_pred_svm))
-    print("precision score: ", precision_score(y_test, y_pred_svm))
+    print("accuracy score: ", svm_acc)
+    print("recall score: ", svm_rec)
+    print("precision score: ", svm_prec)
 
-    print("SVC")
-    print("accuracy score: ", accuracy_score(y_test, y_pred_svc))
-    print("recall score: ", recall_score(y_test, y_pred_svc))
-    print("precision score: ", precision_score(y_test, y_pred_svc))
+    acc = [dt_acc, svm_acc]
+    prec = [dt_prec, svm_prec]
+    rec = [dt_rec, svm_rec]
 
-    print("KNN with N=3")
-    print("accuracy score: ", accuracy_score(y_test, y_pred_knn))
-    print("recall score: ", recall_score(y_test, y_pred_knn))
-    print("precision score: ", precision_score(y_test, y_pred_knn))
+    metrics = pd.DataFrame(
+        {'Accuracy': acc,
+         'Precision': prec,
+         'Recall': rec
+         })
+
+    ax = metrics.plot.bar(zorder=3)
+   # metrics_2.plot.bar(ax=ax)
+    plt.grid(zorder=0, alpha=0.5)
+    plt.xlabel('Classifier')
+    plt.xticks(np.arange(2), {'SVM', 'Decision Tree'}, rotation='horizontal')
+   # plt.legend(bbox_to_anchor=(0.9, 1), loc=2, borderaxespad=0.)
+    plt.ylabel("Metric value")
+    plt.title("Comparison of Decision Tree and SVM classifiers")
+    plt.show()
+
+    # Classify with KNN
+    # clf = KNeighborsClassifier(n_neighbors=3)
+    # clf.fit(X_train, y_train)
+    # y_pred_knn = clf.predict(X_test)
+
+
+    # print("Random Forest")
+    # print("accuracy score: ", accuracy_score(y_test, y_pred_rf))
+    # print("recall score: ", recall_score(y_test, y_pred_rf))
+    # print("precision score: ", precision_score(y_test, y_pred_rf))
+    #
+    # print("AdaBoost")
+    # print("accuracy score: ", accuracy_score(y_test, y_pred_ab))
+    # print("recall score: ", recall_score(y_test, y_pred_ab))
+    # print("precision score: ", precision_score(y_test, y_pred_ab))
+
+    # print("SVC")
+    # print("accuracy score: ", accuracy_score(y_test, y_pred_svc))
+    # print("recall score: ", recall_score(y_test, y_pred_svc))
+    # print("precision score: ", precision_score(y_test, y_pred_svc))
+    #
+    # print("KNN with N=3")
+    # print("accuracy score: ", accuracy_score(y_test, y_pred_knn))
+    # print("recall score: ", recall_score(y_test, y_pred_knn))
+    # print("precision score: ", precision_score(y_test, y_pred_knn))
 
    # # res = pd.DataFrame({'true label': y_test.data, 'pred': y_pred})
    # # res.to_csv('res.csv')
