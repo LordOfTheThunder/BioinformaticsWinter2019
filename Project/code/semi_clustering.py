@@ -19,31 +19,31 @@ gene_exp = df[samples]
 res_kmeans = []
 res_hierarchical = []
 cluster_range = range(2, 15)
-for i in cluster_range:
-    model = KMeans(n_clusters=i)
-    clusters = model.fit_predict(gene_exp)
-    hier_cluster = AgglomerativeClustering(n_clusters=i)
-    hier_clusters = hier_cluster.fit_predict(gene_exp)
-    res_kmeans.append(metrics.silhouette_score(gene_exp, clusters))
-    res_hierarchical.append(metrics.silhouette_score(gene_exp, hier_clusters))
-
-    # Other metrics which we decided not to use for now
-    # res.append(metrics.normalized_mutual_info_score(df['apoptosis_related'], clusters))
-    # res.append(metrics.homogeneity_score(df['apoptosis_related'], clusters))
-    # res.append(metrics.fowlkes_mallows_score(df['apoptosis_related'], clusters))
-    # res_kmeans.append(metrics.completeness_score(df['apoptosis_related'], clusters))
-    # res_hierarchical.append(metrics.completeness_score(df['apoptosis_related'], hier_clusters))
-    # res_kmeans.append(metrics.davies_bouldin_score(gene_exp, clusters))
-    # res_hierarchical.append(metrics.davies_bouldin_score(gene_exp, hier_clusters))
-    # res_kmeans.append(metrics.calinski_harabaz_score(gene_exp, clusters))
-    # res_hierarchical.append(metrics.calinski_harabaz_score(gene_exp, hier_clusters))
-
-plt.title('Silhouette score as a function of number of clusters')
-plt.plot(cluster_range, res_kmeans, 'r', label='KMeans')
-plt.plot(cluster_range, res_hierarchical, 'g', label='Hierarchical')
-plt.grid(True)
-plt.legend()
-plt.show()
+# for i in cluster_range:
+#     model = KMeans(n_clusters=i)
+#     clusters = model.fit_predict(gene_exp)
+#     hier_cluster = AgglomerativeClustering(n_clusters=i)
+#     hier_clusters = hier_cluster.fit_predict(gene_exp)
+#     res_kmeans.append(metrics.silhouette_score(gene_exp, clusters))
+#     res_hierarchical.append(metrics.silhouette_score(gene_exp, hier_clusters))
+#
+#     # Other metrics which we decided not to use for now
+#     # res.append(metrics.normalized_mutual_info_score(df['apoptosis_related'], clusters))
+#     # res.append(metrics.homogeneity_score(df['apoptosis_related'], clusters))
+#     # res.append(metrics.fowlkes_mallows_score(df['apoptosis_related'], clusters))
+#     # res_kmeans.append(metrics.completeness_score(df['apoptosis_related'], clusters))
+#     # res_hierarchical.append(metrics.completeness_score(df['apoptosis_related'], hier_clusters))
+#     # res_kmeans.append(metrics.davies_bouldin_score(gene_exp, clusters))
+#     # res_hierarchical.append(metrics.davies_bouldin_score(gene_exp, hier_clusters))
+#     # res_kmeans.append(metrics.calinski_harabaz_score(gene_exp, clusters))
+#     # res_hierarchical.append(metrics.calinski_harabaz_score(gene_exp, hier_clusters))
+#
+# plt.title('Silhouette score as a function of number of clusters')
+# plt.plot(cluster_range, res_kmeans, 'r', label='KMeans')
+# plt.plot(cluster_range, res_hierarchical, 'g', label='Hierarchical')
+# plt.grid(True)
+# plt.legend()
+# plt.show()
 
 df = pd.read_csv('train_mean.csv')
 gene_exp = df[samples]
@@ -59,5 +59,12 @@ print(sorted_pred_dict)
 filtered_gene_exp = df[df['label'] == True]
 predict_true = list(model.predict(filtered_gene_exp[samples]))
 count_list = [predict_true.count(i) for i in range(model.n_clusters)]
+pred_dict_true = Counter(predict_true)
+sorted_predict_true = sorted(pred_dict_true.items(), key=operator.itemgetter(1), reverse=True)
+print(sorted_predict_true)
+
+for size,pred_true in zip(sorted_pred_dict, sorted_predict_true):
+    print('Cluster: ', pred_true[0], 'true labels: ', (pred_true[1] / size[1]))
+
 accuracy = max(count_list) / len(predict_true)
 print("KMeans accuracy: ", accuracy)
