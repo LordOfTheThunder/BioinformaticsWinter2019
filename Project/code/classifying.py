@@ -118,9 +118,23 @@ if __name__ == "__main__":
     print("recall score: ", svm_rec)
     print("precision score: ", svm_prec)
 
-    acc = [dt_acc, svm_acc]
-    prec = [dt_prec, svm_prec]
-    rec = [dt_rec, svm_rec]
+    # KNN
+    clf = KNeighborsClassifier(n_neighbors=5)
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    knn_acc = accuracy_score(y_test, y_pred)
+    knn_rec = recall_score(y_test, y_pred)
+    knn_prec = precision_score(y_test, y_pred)
+
+    print("KNN")
+    print("accuracy score: ", knn_acc)
+    print("recall score: ", knn_rec)
+    print("precision score: ", knn_prec)
+
+    acc = [dt_acc, svm_acc, knn_acc]
+    prec = [dt_prec, svm_prec, knn_prec]
+    rec = [dt_rec, svm_rec, knn_rec]
 
     metrics = pd.DataFrame(
         {'Accuracy': acc,
@@ -132,7 +146,7 @@ if __name__ == "__main__":
    # metrics_2.plot.bar(ax=ax)
     plt.grid(zorder=0, alpha=0.5)
     plt.xlabel('Classifier')
-    plt.xticks(np.arange(2), {'SVM', 'Decision Tree'}, rotation='horizontal')
+    plt.xticks(np.arange(3), {'SVM', 'Decision Tree', 'KNN'}, rotation='horizontal')
    # plt.legend(bbox_to_anchor=(0.9, 1), loc=2, borderaxespad=0.)
     plt.ylabel("Metric value")
     plt.title("Comparison of Decision Tree and SVM classifiers")
