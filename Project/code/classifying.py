@@ -10,9 +10,14 @@ from sklearn.preprocessing import StandardScaler, FunctionTransformer
 import numpy as np
 from sklearn import svm
 import matplotlib.pyplot as plt
+from sklearn.dummy import DummyClassifier
 
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
+
+plt.rcParams['font.size'] = 14
+plt.rcParams['legend.fontsize'] = 12
+plt.rcParams['lines.linewidth'] = 2
 
 if __name__ == "__main__":
     # warnings.filterwarnings("ignore")
@@ -119,7 +124,7 @@ if __name__ == "__main__":
     print("precision score: ", svm_prec)
 
     # KNN
-    clf = KNeighborsClassifier(n_neighbors=5)
+    clf = KNeighborsClassifier(n_neighbors=3)
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
 
@@ -132,9 +137,23 @@ if __name__ == "__main__":
     print("recall score: ", knn_rec)
     print("precision score: ", knn_prec)
 
-    acc = [dt_acc, svm_acc, knn_acc]
-    prec = [dt_prec, svm_prec, knn_prec]
-    rec = [dt_rec, svm_rec, knn_rec]
+    # Dummy classifier
+    clf = DummyClassifier()
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+
+    dummy_acc = accuracy_score(y_test, y_pred)
+    dummy_rec = recall_score(y_test, y_pred)
+    dummy_prec = precision_score(y_test, y_pred)
+
+    print("Dummy")
+    print("accuracy score: ", dummy_acc)
+    print("recall score: ", dummy_rec)
+    print("precision score: ", dummy_prec)
+
+    acc = [dt_acc, svm_acc, knn_acc, dummy_acc]
+    prec = [dt_prec, svm_prec, knn_prec, dummy_prec]
+    rec = [dt_rec, svm_rec, knn_rec, dummy_rec]
 
     metrics = pd.DataFrame(
         {'Accuracy': acc,
@@ -145,11 +164,11 @@ if __name__ == "__main__":
     ax = metrics.plot.bar(zorder=3)
    # metrics_2.plot.bar(ax=ax)
     plt.grid(zorder=0, alpha=0.5)
-    plt.xlabel('Classifier')
-    plt.xticks(np.arange(3), {'SVM', 'Decision Tree', 'KNN'}, rotation='horizontal')
+    # plt.xlabel('Classifier')
+    plt.xticks(np.arange(4), ('Decision Tree', 'SVM', 'KNN', 'Dummy clf.'), rotation='horizontal')
    # plt.legend(bbox_to_anchor=(0.9, 1), loc=2, borderaxespad=0.)
-    plt.ylabel("Metric value")
-    plt.title("Comparison of Decision Tree and SVM classifiers")
+    plt.ylabel("Score")
+    plt.title("Comparison of Classifier Scores")
     plt.show()
 
     # Classify with KNN
@@ -178,5 +197,5 @@ if __name__ == "__main__":
     # print("recall score: ", recall_score(y_test, y_pred_knn))
     # print("precision score: ", precision_score(y_test, y_pred_knn))
 
-   # # res = pd.DataFrame({'true label': y_test.data, 'pred': y_pred})
-   # # res.to_csv('res.csv')
+    res = pd.DataFrame({'true label': y_test.data, 'pred': y_pred_svm})
+    res.to_csv('res_2.csv')

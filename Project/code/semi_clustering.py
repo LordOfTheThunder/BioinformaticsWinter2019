@@ -13,6 +13,11 @@ from sklearn import metrics
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
 
+
+plt.rcParams['font.size'] = 14
+plt.rcParams['legend.fontsize'] = 12
+plt.rcParams['lines.linewidth'] = 2
+
 df = pd.read_csv('data_filtered.csv')
 gene_exp = df[samples]
 
