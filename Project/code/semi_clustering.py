@@ -55,7 +55,7 @@ plt.rcParams['lines.linewidth'] = 2
 
 df = pd.read_csv('train_filtered.csv')
 gene_exp = df[samples]
-model = KMeans(n_clusters=2)
+model = KMeans(n_clusters=3)
 model.fit_predict(gene_exp)
 test_df = pd.read_csv('test_norm.csv')
 test_gene_exp = test_df[samples]
@@ -64,7 +64,8 @@ pred_dict = Counter(pred)
 sorted_pred_dict = sorted(pred_dict.items(), key=operator.itemgetter(1), reverse=True)
 print(sorted_pred_dict)
 
-filtered_gene_exp = df[df['label'] == True]
+
+filtered_gene_exp = test_df[test_df['label'] == True]
 predict_true = list(model.predict(filtered_gene_exp[samples]))
 count_list = [predict_true.count(i) for i in range(model.n_clusters)]
 pred_dict_true = Counter(predict_true)
