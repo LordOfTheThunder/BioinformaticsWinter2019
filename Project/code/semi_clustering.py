@@ -18,12 +18,13 @@ plt.rcParams['font.size'] = 14
 plt.rcParams['legend.fontsize'] = 12
 plt.rcParams['lines.linewidth'] = 2
 
-df = pd.read_csv('data_filtered.csv')
-gene_exp = df[samples]
+# df = pd.read_csv('data_filtered.csv')
+# df = pd.read_csv('train_filtered.csv')
+# gene_exp = df[samples]
 
-res_kmeans = []
-res_hierarchical = []
-cluster_range = range(2, 15)
+# res_kmeans = []
+# res_hierarchical = []
+# cluster_range = range(2, 15)
 # for i in cluster_range:
 #     model = KMeans(n_clusters=i)
 #     clusters = model.fit_predict(gene_exp)
@@ -44,17 +45,19 @@ cluster_range = range(2, 15)
 #     # res_hierarchical.append(metrics.calinski_harabaz_score(gene_exp, hier_clusters))
 #
 # plt.title('Silhouette score as a function of number of clusters')
+# plt.xlabel('Number of clusters')
+# plt.ylabel('Score')
 # plt.plot(cluster_range, res_kmeans, 'r', label='KMeans')
 # plt.plot(cluster_range, res_hierarchical, 'g', label='Hierarchical')
 # plt.grid(True)
 # plt.legend()
 # plt.show()
 
-df = pd.read_csv('train_mean.csv')
+df = pd.read_csv('train_filtered.csv')
 gene_exp = df[samples]
-model = KMeans(n_clusters=3)
+model = KMeans(n_clusters=2)
 model.fit_predict(gene_exp)
-test_df = pd.read_csv('test_mean.csv')
+test_df = pd.read_csv('test_norm.csv')
 test_gene_exp = test_df[samples]
 pred = model.predict(test_gene_exp)
 pred_dict = Counter(pred)
