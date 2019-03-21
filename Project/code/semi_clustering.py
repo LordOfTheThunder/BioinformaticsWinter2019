@@ -8,7 +8,7 @@ import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 from collections import Counter, defaultdict
 import operator
-from sklearn import metrics
+from sklearn.metrics import accuracy_score, recall_score, precision_score
 
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
@@ -55,25 +55,33 @@ plt.rcParams['lines.linewidth'] = 2
 
 df = pd.read_csv('train_filtered.csv')
 gene_exp = df[samples]
-model = KMeans(n_clusters=3)
+model = KMeans(n_clusters=2)
 model.fit_predict(gene_exp)
 test_df = pd.read_csv('test_norm.csv')
 test_gene_exp = test_df[samples]
+y_test = test_df['label']
 pred = model.predict(test_gene_exp)
-pred_dict = Counter(pred)
-sorted_pred_dict = sorted(pred_dict.items(), key=operator.itemgetter(1), reverse=True)
-print(sorted_pred_dict)
 
+acc = accuracy_score(y_test, pred)
+rec = recall_score(y_test, pred)
+prec = precision_score(y_test, pred)
 
-filtered_gene_exp = test_df[test_df['label'] == True]
-predict_true = list(model.predict(filtered_gene_exp[samples]))
-count_list = [predict_true.count(i) for i in range(model.n_clusters)]
-pred_dict_true = Counter(predict_true)
-sorted_predict_true = sorted(pred_dict_true.items(), key=operator.itemgetter(1), reverse=True)
-print(sorted_predict_true)
+print(acc, rec, prec)
 
-for size,pred_true in zip(sorted_pred_dict, sorted_predict_true):
-    print('Cluster: ', pred_true[0], 'true labels: ', (pred_true[1] / size[1]))
-
-accuracy = max(count_list) / len(predict_true)
-print("KMeans accuracy: ", accuracy)
+# pred_dict = Counter(pred)
+# sorted_pred_dict = sorted(pred_dict.items(), key=operator.itemgetter(1), reverse=True)
+# print(sorted_pred_dict)
+#
+#
+# filtered_gene_exp = test_df[test_df['label'] == True]
+# predict_true = list(model.predict(filtered_gene_exp[samples]))
+# count_list = [predict_true.count(i) for i in range(model.n_clusters)]
+# pred_dict_true = Counter(predict_true)
+# sorted_predict_true = sorted(pred_dict_true.items(), key=operator.itemgetter(1), reverse=True)
+# print(sorted_predict_true)
+#
+# for size,pred_true in zip(sorted_pred_dict, sorted_predict_true):
+#     print('Cluster: ', pred_true[0], 'true labels: ', (pred_true[1] / size[1]))
+#
+# accuracy = max(count_list) / len(predict_true)
+# print("KMeans accuracy: ", accuracy)

@@ -11,6 +11,7 @@ import numpy as np
 from sklearn import svm
 import matplotlib.pyplot as plt
 from sklearn.dummy import DummyClassifier
+from sklearn.cluster import KMeans
 
 samples=['GSM1338298', 'GSM1338302', 'GSM1338306', 'GSM1338297', 'GSM1338301', 'GSM1338305', 'GSM1338296', 'GSM1338300',
          'GSM1338304', 'GSM1338295', 'GSM1338299', 'GSM1338303']
@@ -137,6 +138,24 @@ if __name__ == "__main__":
     print("recall score: ", knn_rec)
     print("precision score: ", knn_prec)
 
+
+    train_filtered = pd.read_csv('train_filtered.csv')
+    gene_exp = train_filtered[samples]
+    model = KMeans(n_clusters=2)
+    model.fit_predict(gene_exp)
+    test_df = pd.read_csv('test_norm.csv')
+    test_gene_exp = test_df[samples]
+    pred = model.predict(test[samples])
+
+    kmeans_acc = accuracy_score(y_test, pred)
+    kmeans_rec = recall_score(y_test, pred)
+    kmeans_prec = precision_score(y_test, pred)
+
+    print("KMeans")
+    print("accuracy score: ", kmeans_acc)
+    print("recall score: ", kmeans_rec)
+    print("precision score: ", kmeans_prec)
+
     # Dummy classifier
     clf = DummyClassifier()
     clf.fit(X_train, y_train)
@@ -151,9 +170,9 @@ if __name__ == "__main__":
     print("recall score: ", dummy_rec)
     print("precision score: ", dummy_prec)
 
-    acc = [dt_acc, svm_acc, knn_acc, dummy_acc]
-    prec = [dt_prec, svm_prec, knn_prec, dummy_prec]
-    rec = [dt_rec, svm_rec, knn_rec, dummy_rec]
+    acc = [dt_acc, svm_acc, knn_acc, kmeans_acc, dummy_acc]
+    prec = [dt_prec, svm_prec, knn_prec, kmeans_prec, dummy_prec]
+    rec = [dt_rec, svm_rec, knn_rec, kmeans_rec, dummy_rec]
 
     metrics = pd.DataFrame(
         {'Accuracy': acc,
@@ -165,7 +184,7 @@ if __name__ == "__main__":
    # metrics_2.plot.bar(ax=ax)
     plt.grid(zorder=0, alpha=0.5)
     # plt.xlabel('Classifier')
-    plt.xticks(np.arange(4), ('Decision Tree', 'SVM', 'KNN', 'Dummy clf.'), rotation='horizontal')
+    plt.xticks(np.arange(5), ('Decision\nTree', 'SVM', 'KNN', 'KMeans', 'Dummy\nclf.'), rotation='horizontal')
    # plt.legend(bbox_to_anchor=(0.9, 1), loc=2, borderaxespad=0.)
     plt.ylabel("Score")
     plt.title("Comparison of Classifier Scores")
@@ -197,5 +216,5 @@ if __name__ == "__main__":
     # print("recall score: ", recall_score(y_test, y_pred_knn))
     # print("precision score: ", precision_score(y_test, y_pred_knn))
 
-    res = pd.DataFrame({'true label': y_test.data, 'pred': y_pred_svm})
-    res.to_csv('res_2.csv')
+    # res = pd.DataFrame({'true label': y_test.data, 'pred': y_pred_svm})
+    # res.to_csv('res_2.csv')
